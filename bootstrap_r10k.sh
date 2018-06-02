@@ -4,7 +4,7 @@ set -e
 mkdir -p /tmp/r10k_boot/{modules,r10k}
 touch /tmp/r10k_boot/r10k/hiera.yaml
 puppet module install \
-  --target-dir=/tmp/r10k_boot/modules
+  --target-dir=/tmp/r10k_boot/modules \
   puppet-r10k
 
 puppet apply \
