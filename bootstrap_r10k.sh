@@ -6,6 +6,8 @@ touch /tmp/r10k_boot/r10k/hiera.yaml
 puppet module install \
   --target-dir=/tmp/r10k_boot/modules \
   puppet-r10k
+puppet module install \
+  puppetlabs-puppetserver_gem
 
 puppet apply \
   --confdir=/tmp/r10k_boot/r10k \
