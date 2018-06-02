@@ -1,9 +1,11 @@
-package { 'hiera-eyaml':
+package { 'hiera-eyaml-puppet':
   ensure   => installed,
+  name     => 'hiera-eyaml',
   provider => 'puppet_gem',
 }
-package { 'hiera-eyaml':
+package { 'hiera-eyaml-puppetserver':
   ensure   => installed,
+  name     => 'hiera-eyaml',
   provider => 'puppetserver_gem',
 }
 class { 'r10k':
