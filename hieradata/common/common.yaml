@@ -11,7 +11,7 @@ packages_debian:
 
 packages_redhat:
 - tcpdump
-- vim
+- vim-enhanced
 - strace
 - screen
 - wget
