@@ -1,9 +1,7 @@
 class profile::base (
 ) {
 
-  $fam = $facts['os']['family']
-
-  $packages = lookup("packages_${downcase($fam)}")
+  $packages = lookup("packages_${downcase($facts['os']['family'])}")
 
   package { $packages:
     ensure => installed,
