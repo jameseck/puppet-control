@@ -1,0 +1,24 @@
+#!/bin/bash
+TYPE=$1
+NAME=$2
+STATE=$3
+
+case $STATE in
+  "MASTER")
+    logger "keepalived-notify: restarting bind service"
+<%- if @osfamily == 'RedHat' then -%>
+    systemctl restart named
+<%- else -%>
+    service bind9 restart
+<%- end -%>
+  ;;
+  "BACKUP")
+  ;;
+  "FAULT")
+    exit 0
+  ;;
+  *)
+    logger "keepalived-notify: unknown state"
+    exit 1
+  ;;
+esac
