@@ -6,4 +6,9 @@ class profile::base (
     ensure => installed,
   }
 
+  service { 'puppet':
+    ensure => running,
+    enable => true,
+  }
+
 }
