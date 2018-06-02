@@ -1,8 +1,20 @@
 ---
-packages:
+packages_debian:
 - tcpdump
 - vim
 - strace
 - screen
 - wget
 - curl
+- telnet
+- netcat
+
+packages_redhat:
+- tcpdump
+- vim
+- strace
+- screen
+- wget
+- curl
+- telnet
+- nmap-ncat
