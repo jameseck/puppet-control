@@ -7,6 +7,10 @@ package { 'hiera-eyaml-puppetserver':
   ensure   => installed,
   name     => 'hiera-eyaml',
   provider => 'puppetserver_gem',
+  notify   => Service['puppetserver'],
+}
+service { 'puppetserver':
+  ensure => running,
 }
 class { 'r10k':
   remote          => 'https://github.com/jameseck/puppet-control.git',
