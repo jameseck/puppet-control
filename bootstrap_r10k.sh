@@ -7,6 +7,7 @@ puppet module install \
   --target-dir=/tmp/r10k_boot/modules \
   puppet-r10k
 puppet module install \
+  --target-dir=/tmp/r10k_boot/modules \
   puppetlabs-puppetserver_gem
 
 puppet apply \
