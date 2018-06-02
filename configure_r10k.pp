@@ -10,7 +10,7 @@ package { 'hiera-eyaml-puppetserver':
 }
 class { 'r10k':
   remote          => 'https://github.com/jameseck/puppet-control.git',
-  basedir         => '/etc/puppetlabs/code/environments',
+  r10k_basedir    => '/etc/puppetlabs/code/environments',
   provider        => 'puppet_gem',
   deploy_settings => {
     'purge_levels' => [ 'deployment', 'environment', 'puppetfile' ],
