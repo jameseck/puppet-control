@@ -1,0 +1,10 @@
+---
+profile::base::packages:
+- tcpdump
+- vim
+- strace
+- screen
+- wget
+- curl
+- telnet
+- netcat
