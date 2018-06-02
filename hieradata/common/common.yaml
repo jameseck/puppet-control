@@ -1,0 +1,8 @@
+---
+packages:
+- tcpdump
+- vim
+- strace
+- screen
+- wget
+- curl
