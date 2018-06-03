@@ -133,9 +133,11 @@ class role::dnsdhcp (
       type    => 'A',
       content => $h[1]['ip'],
     }
-    dhcp::host { $h[0]:
-      ip  => $h[1]['ip'],
-      mac => $h[1]['mac'],
+    if ( $h[1]['mac'] != Undef ) {
+      dhcp::host { $h[0]:
+        ip  => $h[1]['ip'],
+        mac => $h[1]['mac'],
+      }
     }
   }
   #create_resources('dhcp::host', $dhcp_hosts)
