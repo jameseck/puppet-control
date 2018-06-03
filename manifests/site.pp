@@ -32,8 +32,6 @@ Package {
   allow_virtual => $allow_virtual_packages,
 }
 
-$role = $trusted['extensions']['pp_role']
-
 # Checking if any trusted facts are defined in the cert, if not we disable this check for now
 # to allow backwards compatibility
 if !is_hash($trusted) {
