@@ -13,6 +13,7 @@ mod 'richardc-datacat', '0.6.2'
 mod 'theforeman-puppet', '9.0.0'
 mod 'theforeman-foreman', '9.1.0'
 mod 'theforeman-tftp', '4.1.0'
+mod 'puppetlabs-apt', '4.5.1'
 
 mod 'jameseck/dns_record',
   :git    => 'https://github.com/jameseck/puppet-dns_record',
