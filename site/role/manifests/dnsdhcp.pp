@@ -8,10 +8,10 @@ class role::dnsdhcp (
   include '::keepalived'
   include '::foreman_proxy'
 
-  $packages = [ 'dnsutils', 'ntpdate', ]
-  package { $packages:
-    ensure => installed,
-  }
+#  $packages = [ 'dnsutils', 'ntpdate', ]
+#  package { $packages:
+#    ensure => installed,
+#  }
 
 
   file { '/etc/keepalived/notify-keepalived.sh':
