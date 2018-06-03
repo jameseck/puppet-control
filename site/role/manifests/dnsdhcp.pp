@@ -84,14 +84,6 @@ class role::dnsdhcp (
     reverse        => true,
   }
 
-  Dns_record {
-    provider => bind,
-    ddns_key => '/etc/bind/rndc.key',
-    server   => 'localhost',
-    ttl      => '3200',
-    domain   => 'je.home',
-  }
-
   #create_resources('dns_record', $hosts)
 
 ########################################################################################################################
@@ -128,15 +120,23 @@ class role::dnsdhcp (
     omapi_key    => 'omapi-key',
   }
 
-  $hosts.each |$h| {
-    dns_record { $h[0]:
+  Dns_record {
+    provider => bind,
+    ddns_key => '/etc/bind/rndc.key',
+    server   => 'localhost',
+    ttl      => '3200',
+    domain   => 'je.home',
+  }
+
+  $hosts.each |$k, $v| {
+    dns_record { $k:
       type    => 'A',
-      content => $h[1]['ip'],
+      content => $v['ip'],
     }
-    if ($h[1]['mac'] =~ Dhcp::Macaddress) {
-      dhcp::host { $h[0]:
-        ip  => $h[1]['ip'],
-        mac => $h[1]['mac'],
+    if ($v['mac'] =~ Dhcp::Macaddress) {
+      dhcp::host { $k:
+        ip  => $v['ip'],
+        mac => $v['mac'],
       }
     }
   }
