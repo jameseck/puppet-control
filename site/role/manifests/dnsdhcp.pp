@@ -69,13 +69,19 @@ class role::dnsdhcp (
     default        => [ $dns_master_ip, ],
   }
 
-  dns::zone { 'je.home':
+  Dns::Zone<| title == 'je.home' |> {
     allow_transfer => [ 'localhost', $dns_master_ip, $dns_slave_ip, ],
     also_notify    => [ $dns_master_ip, $dns_slave_ip, ],
     masters        => $dns_masters,
   }
+#  dns::zone { 'je.home':
+#    allow_transfer => [ 'localhost', $dns_master_ip, $dns_slave_ip, ],
+#    also_notify    => [ $dns_master_ip, $dns_slave_ip, ],
+#    masters        => $dns_masters,
+#  }
 
-  dns::zone { '1.168.192.in-addr.arpa':
+  #dns::zone { '1.168.192.in-addr.arpa':
+  Dns::Zone<| title == '1.168.192.in-addr.arpa' |> {
     allow_transfer => [ 'localhost', $dns_master_ip, $dns_slave_ip, ],
     also_notify    => [ $dns_master_ip, $dns_slave_ip, ],
     masters        => $dns_masters,
