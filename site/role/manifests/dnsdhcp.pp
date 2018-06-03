@@ -60,9 +60,9 @@ class role::dnsdhcp (
     notify  => Class['dns'],
   }
 
-  class { 'dns':
-    defaultzonepath => 'unmanaged',
-  }
+#  class { 'dns':
+#    defaultzonepath => 'unmanaged',
+#  }
 
   $dns_masters = $facts['ipaddress'] ? {
     $dns_master_ip => [],
