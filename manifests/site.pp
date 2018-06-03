@@ -54,5 +54,7 @@ include '::profile::base'
 
 node default {
   #We use the Trusted Cert Role to instantiate the VM by default.
-  include "role::${::role}"
+  if ( defined($::role)) {
+    include "role::${::role}"
+  }
 }
