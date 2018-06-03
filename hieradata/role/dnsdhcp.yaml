@@ -1,5 +1,5 @@
 ---
-hosts:
+role::dnsdhcp::hosts:
   erx.je.home:
     ip: 192.168.1.1
     mac: b8:27:eb:c2:11:56
