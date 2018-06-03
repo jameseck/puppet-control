@@ -8,6 +8,6 @@ mod 'puppetlabs/stdlib',  '4.25.1'
 mod 'theforeman/dhcp',    '4.1.1'
 mod 'theforeman/dns',     '5.2.0'
 
-mod 'jameseck/puppet-dns_record',
+mod 'jameseck/dns_record',
   :git    => 'https://github.com/jameseck/puppet-dns_record',
   :branch => 'master'
