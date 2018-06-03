@@ -133,7 +133,7 @@ class role::dnsdhcp (
       type    => 'A',
       content => $h[1]['ip'],
     }
-    if ( $h[1]['mac'] != Undef ) {
+    if (is_mac_address($h[1]['mac'])) {
       dhcp::host { $h[0]:
         ip  => $h[1]['ip'],
         mac => $h[1]['mac'],
