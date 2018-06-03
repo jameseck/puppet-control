@@ -80,7 +80,8 @@ foreman_proxy::realm: false
 foreman_proxy::dhcp: true
 foreman_proxy::dhcp_managed: true
 foreman_proxy::dhcp_provider: isc
-foreman_proxy::dhcp_subnets: 192.168.1.0/24
+foreman_proxy::dhcp_subnets:
+- 192.168.1.0/24
 foreman_proxy::dhcp_search_domains:
 - je.home
 foreman_proxy::dhcp_option_domains:
@@ -92,8 +93,7 @@ foreman_proxy::dhcp_range: '192.168.1.150 192.168.1.159'
 foreman_proxy::dhcp_network: 192.168.1.0
 foreman_proxy::dhcp_netmask: 255.255.255.0
 foreman_proxy::dhcp_failover: 'dhcp-failover'
-foreman_proxy::dhcp_nameservers:
-- 192.168.1.2 # change to .9
+foreman_proxy::dhcp_nameservers: 192.168.1.2 # change to .9
 foreman_proxy::dhcp_pxeserver: 192.168.1.2 # change to .11 (theforeman) or dnsdhcp vip
 foreman_proxy::dhcp_config: /etc/dhcp/dhcpd.pools
 foreman_proxy::dhcp_leases: /var/lib/dhcp/dhcpd.leases
