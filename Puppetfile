@@ -8,7 +8,13 @@ mod 'puppetlabs/stdlib',  '4.25.1'
 mod 'theforeman/dhcp',    '4.1.1'
 mod 'theforeman/dns',     '5.2.0'
 mod 'theforeman-foreman_proxy', '7.2.1'
+mod 'puppet-extlib', '2.0.1'
+mod 'richardc-datacat', '0.6.2'
+mod 'theforeman-puppet', '9.0.0'
+mod 'theforeman-foreman', '9.1.0'
+mod 'theforeman-tftp', '4.1.0'
 
 mod 'jameseck/dns_record',
   :git    => 'https://github.com/jameseck/puppet-dns_record',
   :branch => 'master'
+
