@@ -1,7 +1,9 @@
-forge "http://forge.puppetlabs.com"
+forge 'https://forge.puppet.com'
 
-mod "puppetlabs-stdlib"
-mod "theforeman-dhcp"
-mod "theforeman-dns"
-mod "arioch-keepalived"
-mod "puppetlabs-ntp"
+mod 'arioch/keepalived',  '1.2.5'
+mod 'camptocamp/systemd', '1.1.1'
+mod 'puppetlabs/concat',  '4.2.1'
+mod 'puppetlabs/ntp',     '7.1.1'
+mod 'puppetlabs/stdlib',  '4.25.1'
+mod 'theforeman/dhcp',    '4.1.1'
+mod 'theforeman/dns',     '5.2.0'
