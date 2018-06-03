@@ -1,46 +1,68 @@
 ---
-dns_records:
-  er.je.home:
-    content: 192.168.1.1
+hosts:
+  erx.je.home:
+    ip: 192.168.1.1
+    mac: b8:27:eb:c2:11:56
   foreman.je.home:
-    content: 192.168.1.3
+    ip: 192.168.1.3
+    mac: 52:54:00:95:86:e4
   puppet.je.home:
-    content: 192.168.1.11
+    ip: 192.168.1.11
   theforeman.je.home:
-    content: 192.168.1.11
+    ip: 192.168.1.11
   plex.je.home:
-    content: 192.168.1.4
+    ip: 192.168.1.4
   minecraft.je.home:
-    content: 192.168.1.25
+    ip: 192.168.1.25
   openshift.je.home:
-    content: 192.168.1.5
+    ip: 192.168.1.5
   origin.je.home:
-    content: 192.168.1.6
-  '\*.os.je.home':
-    content: 192.168.1.6
+    ip: 192.168.1.6
+    mac: 52:54:00:18:30:47
+  '*.os.je.home':
+    ip: 192.168.1.6
   dnsdhcp01.je.home:
-    content: 192.168.1.7
+    ip: 192.168.1.7
+    mac: b8:27:eb:c2:11:56
   dnsdhcp02.je.home:
-    content: 192.168.1.8
+    ip: 192.168.1.8
   dnsdhcp.je.home:
-    content: 192.168.1.9
+    ip: 192.168.1.9
   kvm.je.home:
-    content: 192.168.1.30
+    ip: 192.168.1.30
+    mac: 00:19:bb:d2:34:14
   vhost.je.home:
-    content: 192.168.1.35
+    ip: 192.168.1.35
   magnum.je.home:
-    content: 192.168.1.40
+    ip: 192.168.1.40
+    mac: 1c:1b:0d:eb:d0:02
   wlaptop.je.home:
-    content: 192.168.1.49
+    ip: 192.168.1.49
+    mac: 90:61:ae:5e:e9:2b
   laptop.je.home:
-    content: 192.168.1.50
+    ip: 192.168.1.50
+    mac: 54:e1:ad:96:4c:8c
   rasplex.je.home:
-    content: 192.168.1.51
+    ip: 192.168.1.51
   osmc.je.home:
-    content: 192.168.1.52
+    ip: 192.168.1.52
   ps3.je.home:
-    content: 192.168.1.190
+    ip: 192.168.1.190
   rpi.je.home:
-    content: 192.168.1.222
+    ip: 192.168.1.222
+    mac: b8:27:eb:35:2f:64
   vhost-kvm.je.home:
-    content: 192.168.1.230
+    mac: bc:5f:f4:fe:e7:fc
+    ip: 192.168.1.230
+  fedoradesk.je.home:
+    mac: 08:00:27:c0:42:2a
+    ip: 192.168.1.101
+  unifiap.je.home:
+    mac: f0:9f:c2:f3:ca:2f
+    ip: 192.168.1.39
+  kvm-eric.je.home:
+    mac: fe:00:00:49:07:d9
+    ip: 192.168.1.210
+  tplinksw.je.home:
+    mac: e8:de:27:41:af:bf
+    ip: 192.168.1.249

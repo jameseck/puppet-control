@@ -1,5 +1,5 @@
 class role::dnsdhcp (
-  Hash $dns_records = {},
+  Hash $hosts = {},
 ) {
 
   $dns_master_ip = '192.168.1.151'
@@ -92,7 +92,7 @@ class role::dnsdhcp (
     domain   => 'je.home',
   }
 
-  create_resources('dns_record', $dns_records)
+  #create_resources('dns_record', $hosts)
 
 ########################################################################################################################
 
@@ -128,66 +128,17 @@ class role::dnsdhcp (
     omapi_key    => 'omapi-key',
   }
 
-  $dhcp_hosts = {
-    'fedoradesk.je.home' => {
-      mac => '08:00:27:c0:42:2a',
-      ip  => '192.168.1.101',
-    },
-    'openstack-kvm.je.home' => {
-      mac => 'bc:5f:f4:fe:e7:fc',
-      ip  => '192.168.1.230',
-    },
-    'foreman.je.home' => {
-      mac => '52:54:00:95:86:e4',
-      ip  => '192.168.1.2',
-    },
-    'kvm.je.home' => {
-      mac => '00:19:bb:d2:34:14' ,
-      ip  => '192.168.1.30',
-    },
-    'laptopw.je.home' => {
-      mac => '90:61:ae:5e:e9:2b',
-      ip  => '192.168.1.49',
-    },
-    'laptop.je.home' => {
-      mac => '54:e1:ad:96:4c:8c',
-      ip  => '192.168.1.50',
-    },
-    'origin.je.home' => {
-      mac => '52:54:00:18:30:47',
-      ip  => '192.168.1.6',
-    },
-    'erx.je.home' => {
-      mac => 'b8:27:eb:c2:11:56',
-      ip  => '192.168.1.1',
-    },
-    'rpi.je.home' => {
-      mac => 'b8:27:eb:35:2f:64',
-      ip  => '192.168.1.222',
-    },
-    'magnum.je.home' => {
-      mac => '1c:1b:0d:eb:d0:02',
-      ip  => '192.168.1.40',
-    },
-    'unifiap.je.home' => {
-      mac => 'f0:9f:c2:f3:ca:2f',
-      ip  => '192.168.1.39',
-    },
-    'kvm-eric.je.home' => {
-      mac => 'fe:00:00:49:07:d9',
-      ip  => '192.168.1.210',
-    },
-    'tplinksw.je.home' => {
-      mac => 'e8:de:27:41:af:bf',
-      ip  => '192.168.1.249',
-    },
-    'dnsdhcp01.je.home' => {
-      mac => 'b8:27:eb:c2:11:56',
-      ip  => '',
-    },
+  $hosts.each |$h| {
+    dns_record { $h[0]:
+      type    => 'A',
+      content => $h[1]['ip'],
+    }
+    dhcp::host { $h[0]:
+      ip  => $h[1]['ip'],
+      mac => $h[1]['mac'],
+    }
   }
-
-  create_resources('dhcp::host', $dhcp_hosts)
+  #create_resources('dhcp::host', $dhcp_hosts)
 
   #00:1b:38:fa:48:01	bmw laptop wired
   #00:1f:3a:3c:28:03	bmw laptop wireless
