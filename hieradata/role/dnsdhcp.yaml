@@ -76,6 +76,7 @@ foreman_proxy::tftp: false
 foreman_proxy::dns: false
 foreman_proxy::bmc: false
 foreman_proxy::realm: false
+foreman_proxy::register_in_foreman: false
 
 foreman_proxy::dhcp: true
 foreman_proxy::dhcp_managed: true
@@ -101,16 +102,16 @@ foreman_proxy::dhcp_key_name: omapi-key
 # omapi key
 foreman_proxy::dhcp_key_secret: >
   ENC[PKCS7,MIIBygYJKoZIhvcNAQcDoIIBuzCCAbcCAQAxggEhMIIBHQIBADAFMAACAQEw
-  DQYJKoZIhvcNAQEBBQAEggEA4yi1K/GP1hl6MGJv8vSU9ZSaBmif+0fPP2Rj
-  u9ZpqKrsHVMHTbMao0zsCpsO2OZp3ctM872nCwti8Els3/axhy3rAXTkGqa8
-  muFENaBGDyZcDM/91EqC5tpFnFAHttKPPuiENyC4xb66JXWs+yKMfZ9Lbl8R
-  oaNCLJSQua0V8/hxH76b3jg7E/rWVuI/GVbKWRp+G0JJLbSEjf1P5Q+tnDTe
-  AFdEFVtWAipqbBt4yfsgKoxRzjff6ReFPsiHiDgBbKiorTTp7+ySV3mJpujp
-  UXFveIkFog86mbrOb3baMTeOx7vEOQgyRMc1VL08SzXaVsRM1ve0ADDfkK0F
-  oVkAXzCBjAYJKoZIhvcNAQcBMB0GCWCGSAFlAwQBKgQQ6PeQUxvW0MOEsKNo
-  XOJ3G4BgyAlc1uiYCik/5XCbd18K+FrLpfHNB5WTYyln7ZaeaUO1eyY5dadr
-  RO0ZcBKZ+NPI8qlNWABdTFLyQGD3jKsKR/qTTLuBzoJ6Y/YNquL7rtn8Ezed
-  ZJu0n/JJOBIZTxXR]
+  DQYJKoZIhvcNAQEBBQAEggEAdwc0wgybuAbctkdEjQrkZ/q1eBPD9azcdluh
+  XPffRYE5CE610LrzHy1qkj7gJD06AwVqA5YqNLzMdsHfdz1OyL97k6+IRimr
+  uAqFhhCj86r+n/+Nf20Wla0UP1hF1CLK1SboR1KMFrrxGzA9iUoMCteQ/ZW0
+  N4dw/58bkOO4Nco5II52D0ZkK5hyELoUGsiO3FKl8aqFv4qN2DMndX1AkEpn
+  Eyq2AK60ObGdXwGc3zWAMCgJ67VD9CFPkLDJlAic/xi7OBn0ZByVI5oGkexg
+  ow86Sh82K0iUM2YQBvUZcCXMmx0Xs0KJ/hW/k2U2dxAn8/WRWWVy/rp+RE1A
+  O0/oSTCBjAYJKoZIhvcNAQcBMB0GCWCGSAFlAwQBKgQQSiBIEd2KiPr06Y1N
+  xmgjuoBgC7Z87qZbJ5Ukg6TU0ATxnjE3VlwXJWUsdL8GlnDq4T6KVko8X7Rc
+  iMFcEFf1n1U/vQbnnvXYt0/cC4pz/uM0lHic9bRMGZkgqk6Lx26P0UpNf0fV
+  EUsxcch2xUUwrmQU]
 foreman_proxy::dhcp_omapi_port: 7911
 foreman_proxy::dhcp_node_type: primary # primary/secondary - move to node hieradata
 foreman_proxy::dhcp_peer_address: 192.168.1.7 # 192.168.1.7/8 - move to node hieradata
