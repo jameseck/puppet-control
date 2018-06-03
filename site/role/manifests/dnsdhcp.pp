@@ -1,4 +1,5 @@
 class role::dnsdhcp (
+  Hash $dns_records = {},
 ) {
 
   $dns_master_ip = '192.168.1.151'
@@ -44,8 +45,8 @@ class role::dnsdhcp (
     virtual_ipaddress => [ '192.168.1.221/24' ],
     notify_script     => '/etc/keepalived/notify-keepalived.sh',
     track_script      => 'checkscript',
-  } ->
-  keepalived::vrrp::script { 'checkscript':
+  }
+  -> keepalived::vrrp::script { 'checkscript':
     script   => '/etc/keepalived/check-keepalived.sh',
     interval => 2,
     rise     => 2,
@@ -66,7 +67,7 @@ class role::dnsdhcp (
     defaultzonepath => 'unmanaged',
   }
 
-  $dns_masters = $ipaddress ? {
+  $dns_masters = $facts['ipaddress'] ? {
     $dns_master_ip => [],
     default        => [ $dns_master_ip, ],
   }
@@ -92,45 +93,31 @@ class role::dnsdhcp (
     domain   => 'je.home',
   }
 
-  dns_record { 'bob.je.home':
-    ensure   => present,
-    content  => '192.168.1.192',
-    type     => 'A',
-  }
-  dns_record { 'bobtxt.je.home':
-    ensure   => present,
-    content  => 'somestuffhere',
-    type     => 'TXT',
-  }
-  dns_record { 'bob2.je.home':
-    ensure   => present,
-    content  => '192.168.1.201',
-    type     => 'A',
-  }
+  create_resources('dns_record', $dns_records)
 
 ########################################################################################################################
 
   class { 'dhcp':
-    dnsdomain       => [
+    dnsdomain    => [
       'je.home',
       '1.168.192.in-addr.arpa',
     ],
-    nameservers     => ['192.168.1.1'],
-    ntpservers      => ['uk.pool.ntp.org'],
-    interfaces      => ['eth0'],
-    dnsupdatekey    => '/etc/bind/rndc.key',
-    dnskeyname      => 'rndc-key',
-    require         => Class['dns'],
-    pxeserver       => $facts['ipaddress'],
-    pxefilename     => 'pxelinux.0',
-    omapi_name      => 'omapi-key',
-    omapi_key       => 'CMxsdCRaTT3BsMV1F1XaVW7+1iuxwsRKCtTfYgAXKc2XphcC/aOS5RePO/kLGyDiJ2yKbTqYXhIUy4sQkq70Og==',
+    nameservers  => ['192.168.1.1'],
+    ntpservers   => ['uk.pool.ntp.org'],
+    interfaces   => ['eth0'],
+    dnsupdatekey => '/etc/bind/rndc.key',
+    dnskeyname   => 'rndc-key',
+    require      => Class['dns'],
+    pxeserver    => $facts['ipaddress'],
+    pxefilename  => 'pxelinux.0',
+    omapi_name   => 'omapi-key',
+    omapi_key    => 'CMxsdCRaTT3BsMV1F1XaVW7+1iuxwsRKCtTfYgAXKc2XphcC/aOS5RePO/kLGyDiJ2yKbTqYXhIUy4sQkq70Og==',
   }
 
   dhcp::pool { 'je.home':
     network  => '192.168.1.0',
     mask     => '255.255.255.0',
-    range    => ['192.168.1.220 192.168.1.230',],
+    range    => ['192.168.1.150 192.168.1.169',],
     gateway  => '192.168.1.1',
     failover => 'dhcp-failover',
   }
@@ -195,11 +182,14 @@ class role::dnsdhcp (
       mac => 'e8:de:27:41:af:bf',
       ip  => '192.168.1.249',
     },
+    'dnsdhcp01.je.home' => {
+      mac => 'b8:27:eb:c2:11:56',
+      ip  => '',
+    },
   }
 
   create_resources('dhcp::host', $dhcp_hosts)
 
-  #b8:27:eb:c2:11:56	raspberrypi.je.home
   #00:1b:38:fa:48:01	bmw laptop wired
   #00:1f:3a:3c:28:03	bmw laptop wireless
   #00:05:cd:5b:0e:bf	denon ?? maybe

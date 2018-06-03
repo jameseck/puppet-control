@@ -32,21 +32,29 @@ Package {
   allow_virtual => $allow_virtual_packages,
 }
 
+$role = $trusted['extensions']['pp_role']
+
+# Checking if any trusted facts are defined in the cert, if not we disable this check for now
+# to allow backwards compatibility
+if !is_hash($trusted) {
+
+  crit('Trusted fact support MUST be turned on the server for any Puppet Catalogs to be served')
+
+} else {
+  if defined('$role') {
+    fail("The servers role can NOT be overridden, it should always be defined by trusted facts (Role Assigned ${role})")
+  }
+
+  $role = $trusted['extensions']['pp_role']
+
+  # The $certname fact is self-reported by the node to we cannot trust it :-(
+  # https://docs.puppetlabs.com/puppet/latest/reference/lang_facts_and_builtin_vars.html#puppet-agent-facts
+  $trusted_certname = $trusted['certname']
+}
+
 include '::profile::base'
 
-# DEFAULT NODE
-# Node definitions in this file are merged with node data from the console. See
-# http://docs.puppetlabs.com/guides/language_guide.html#nodes for more on
-# node definitions.
-
-# The default node definition matches any node lacking a more specific node
-# definition. If there are no other nodes in this file, classes declared here
-# will be included in every node's catalog, *in addition* to any classes
-# specified in the console for that node.
-
-#node default {
-#  # This is where you can declare classes for all nodes.
-#  # Example:
-#  #   class { 'my_class': }
-#  notify { 'notifymsgje': message => 'This is the default node block.' }
-#}
+node default {
+  #We use the Trusted Cert Role to instantiate the VM by default.
+  include "role::${::role}"
+}
