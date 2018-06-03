@@ -22,7 +22,7 @@ class role::dnsdhcp (
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
-    content => template('role/notify-keepalived.sh.erb'),
+    content => template('role/dnsdhcp/notify-keepalived.sh.erb'),
     notify  => Class['keepalived::service'],
   }
 
@@ -31,7 +31,7 @@ class role::dnsdhcp (
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
-    content => template('role/check-keepalived.sh.erb'),
+    content => template('role/dnsdhcp/check-keepalived.sh.erb'),
     notify  => Class['keepalived::service'],
   }
 
