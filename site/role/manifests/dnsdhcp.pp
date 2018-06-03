@@ -13,7 +13,6 @@ class role::dnsdhcp (
   }
 
   class { 'ntp':
-    servers => [ '192.168.1.1', ],
   }
 
 
@@ -42,7 +41,7 @@ class role::dnsdhcp (
     priority          => '101',
     auth_type         => 'PASS',
     auth_pass         => 'secret',
-    virtual_ipaddress => [ '192.168.1.221/24' ],
+    virtual_ipaddress => [ '192.168.1.9/24' ],
     notify_script     => '/etc/keepalived/notify-keepalived.sh',
     track_script      => 'checkscript',
   }
@@ -102,7 +101,7 @@ class role::dnsdhcp (
       'je.home',
       '1.168.192.in-addr.arpa',
     ],
-    nameservers  => ['192.168.1.1'],
+    nameservers  => ['192.168.1.2'],
     ntpservers   => ['uk.pool.ntp.org'],
     interfaces   => ['eth0'],
     dnsupdatekey => '/etc/bind/rndc.key',
