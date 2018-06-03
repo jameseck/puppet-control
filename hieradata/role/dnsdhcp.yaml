@@ -16,7 +16,7 @@ dns_records:
     ip: 192.168.1.5
   origin.je.home:
     ip: 192.168.1.6
-  "*.os.je.home":
+  '*.os.je.home':
     ip: 192.168.1.6
   dnsdhcp01.je.home:
     ip: 192.168.1.7
