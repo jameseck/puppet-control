@@ -1,46 +1,46 @@
 ---
 dns_records:
   er.je.home:
-    ip: 192.168.1.1
+    content: 192.168.1.1
   foreman.je.home:
-    ip: 192.168.1.3
+    content: 192.168.1.3
   puppet.je.home:
-    ip: 192.168.1.11
+    content: 192.168.1.11
   theforeman.je.home:
-    ip: 192.168.1.11
+    content: 192.168.1.11
   plex.je.home:
-    ip: 192.168.1.4
+    content: 192.168.1.4
   minecraft.je.home:
-    ip: 192.168.1.25
+    content: 192.168.1.25
   openshift.je.home:
-    ip: 192.168.1.5
+    content: 192.168.1.5
   origin.je.home:
-    ip: 192.168.1.6
+    content: 192.168.1.6
   '\*.os.je.home':
-    ip: 192.168.1.6
+    content: 192.168.1.6
   dnsdhcp01.je.home:
-    ip: 192.168.1.7
+    content: 192.168.1.7
   dnsdhcp02.je.home:
-    ip: 192.168.1.8
+    content: 192.168.1.8
   dnsdhcp.je.home:
-    ip: 192.168.1.9
+    content: 192.168.1.9
   kvm.je.home:
-    ip: 192.168.1.30
+    content: 192.168.1.30
   vhost.je.home:
-    ip: 192.168.1.35
+    content: 192.168.1.35
   magnum.je.home:
-    ip: 192.168.1.40
+    content: 192.168.1.40
   wlaptop.je.home:
-    ip: 192.168.1.49
+    content: 192.168.1.49
   laptop.je.home:
-    ip: 192.168.1.50
+    content: 192.168.1.50
   rasplex.je.home:
-    ip: 192.168.1.51
+    content: 192.168.1.51
   osmc.je.home:
-    ip: 192.168.1.52
+    content: 192.168.1.52
   ps3.je.home:
-    ip: 192.168.1.190
+    content: 192.168.1.190
   rpi.je.home:
-    ip: 192.168.1.222
+    content: 192.168.1.222
   vhost-kvm.je.home:
-    ip: 192.168.1.230
+    content: 192.168.1.230
