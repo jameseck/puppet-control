@@ -7,6 +7,7 @@ mod 'puppetlabs/ntp',     '7.1.1'
 mod 'puppetlabs/stdlib',  '4.25.1'
 mod 'theforeman/dhcp',    '4.1.1'
 mod 'theforeman/dns',     '5.2.0'
+mod 'theforeman-foreman_proxy', '7.2.1'
 
 mod 'jameseck/dns_record',
   :git    => 'https://github.com/jameseck/puppet-dns_record',

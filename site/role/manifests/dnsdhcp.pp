@@ -6,13 +6,11 @@ class role::dnsdhcp (
   $dns_slave_ip  = '192.168.1.168'
 
   include '::keepalived'
+  include '::foreman_proxy'
 
   $packages = [ 'dnsutils', 'ntpdate', ]
   package { $packages:
     ensure => installed,
-  }
-
-  class { 'ntp':
   }
 
 
@@ -88,37 +86,39 @@ class role::dnsdhcp (
 
 ########################################################################################################################
 
-  class { 'dhcp':
-    dnsdomain    => [
-      'je.home',
-      '1.168.192.in-addr.arpa',
-    ],
-    nameservers  => ['192.168.1.2'],
-    ntpservers   => ['uk.pool.ntp.org'],
-    interfaces   => ['eth0'],
-    dnsupdatekey => '/etc/bind/rndc.key',
-    dnskeyname   => 'rndc-key',
-    require      => Class['dns'],
-    pxeserver    => $facts['ipaddress'],
-    pxefilename  => 'pxelinux.0',
-    omapi_name   => 'omapi-key',
-    omapi_key    => 'CMxsdCRaTT3BsMV1F1XaVW7+1iuxwsRKCtTfYgAXKc2XphcC/aOS5RePO/kLGyDiJ2yKbTqYXhIUy4sQkq70Og==',
-  }
+#  class { 'dhcp':
+#    dnsdomain    => [
+#      'je.home',
+#      '1.168.192.in-addr.arpa',
+#    ],
+#    nameservers  => ['192.168.1.2'],
+#    ntpservers   => ['uk.pool.ntp.org'],
+#    interfaces   => ['eth0'],
+#    dnsupdatekey => '/etc/bind/rndc.key',
+#    dnskeyname   => 'rndc-key',
+#    require      => Class['dns'],
+#    pxeserver    => $facts['ipaddress'],
+#    pxefilename  => 'pxelinux.0',
+#    omapi_name   => 'omapi-key',
+#    omapi_key    => 'CMxsdCRaTT3BsMV1F1XaVW7+1iuxwsRKCtTfYgAXKc2XphcC/aOS5RePO/kLGyDiJ2yKbTqYXhIUy4sQkq70Og==',
+#  }
 
-  dhcp::pool { 'je.home':
-    network  => '192.168.1.0',
-    mask     => '255.255.255.0',
-    range    => ['192.168.1.150 192.168.1.169',],
-    gateway  => '192.168.1.1',
-    failover => 'dhcp-failover',
-  }
 
-  class { 'dhcp::failover':
-    role         => primary,
-    port         => 647,
-    peer_address => '192.168.1.7',
-    omapi_key    => 'omapi-key',
-  }
+
+#  dhcp::pool { 'je.home':
+#    network  => '192.168.1.0',
+#    mask     => '255.255.255.0',
+#    range    => ['192.168.1.150 192.168.1.169',],
+#    gateway  => '192.168.1.1',
+#    failover => 'dhcp-failover',
+#  }
+
+#  class { 'dhcp::failover':
+#    role         => primary,
+#    port         => 647,
+#    peer_address => '192.168.1.7',
+#    omapi_key    => 'omapi-key',
+#  }
 
   Dns_record {
     provider => bind,
@@ -149,5 +149,17 @@ class role::dnsdhcp (
   #00:07:f5:22:33:3b	Sony STR-DN1020
   #b8:27:eb:81:65:2e	raspberrypi3.je.home
   #c0:4a:00:6c:fd:e2 	dlink.je.home
+
+#  class{'::foreman_proxy':
+#    puppet        => true,
+#    puppetca      => true,
+#    tftp          => false,
+#    dhcp          => true,
+#    dhcp_provider => 'isc',
+#    dns           => false,
+#    bmc           => false,
+#    realm         => false,
+#  }
+
 
 }

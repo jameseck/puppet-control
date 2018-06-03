@@ -10,8 +10,6 @@ role::dnsdhcp::hosts:
     ip: 192.168.1.11
   theforeman.je.home:
     ip: 192.168.1.11
-  plex.je.home:
-    ip: 192.168.1.4
   minecraft.je.home:
     ip: 192.168.1.25
   openshift.je.home:
@@ -66,3 +64,61 @@ role::dnsdhcp::hosts:
   tplinksw.je.home:
     mac: e8:de:27:41:af:bf
     ip: 192.168.1.249
+
+dhcp::ntpservers:
+- 0.uk.pool.ntp.org
+- 1.uk.pool.ntp.org
+- 2.uk.pool.ntp.org
+- 3.uk.pool.ntp.org
+foreman_proxy::puppet: false
+foreman_proxy::puppetca: false
+foreman_proxy::tftp: false
+foreman_proxy::dns: false
+foreman_proxy::bmc: false
+foreman_proxy::realm: false
+
+foreman_proxy::dhcp: true
+foreman_proxy::dhcp_managed: true
+foreman_proxy::dhcp_provider: isc
+foreman_proxy::dhcp_subnets: 192.168.1.0/24
+foreman_proxy::dhcp_search_domains:
+- je.home
+foreman_proxy::dhcp_option_domains:
+- je.home
+- 1.168.192.in-addr.arpa
+foreman_proxy::dhcp_interface: eth0
+foreman_proxy::dhcp_gateway: 192.168.1.1
+foreman_proxy::dhcp_range: '192.168.1.150 192.168.1.159'
+foreman_proxy::dhcp_network: 192.168.1.0
+foreman_proxy::dhcp_netmask: 255.255.255.0
+foreman_proxy::dhcp_failover: 'dhcp-failover'
+foreman_proxy::dhcp_nameservers:
+- 192.168.1.2 # change to .9
+foreman_proxy::dhcp_pxeserver: 192.168.1.2 # change to .11 (theforeman) or dnsdhcp vip
+foreman_proxy::dhcp_config: /etc/dhcp/dhcpd.pools
+foreman_proxy::dhcp_leases: /var/lib/dhcp/dhcpd.leases
+foreman_proxy::dhcp_key_name: omapi-key
+# omapi key
+foreman_proxy::dhcp_key_secret: >
+  ENC[PKCS7,MIIBygYJKoZIhvcNAQcDoIIBuzCCAbcCAQAxggEhMIIBHQIBADAFMAACAQEw
+  DQYJKoZIhvcNAQEBBQAEggEA4yi1K/GP1hl6MGJv8vSU9ZSaBmif+0fPP2Rj
+  u9ZpqKrsHVMHTbMao0zsCpsO2OZp3ctM872nCwti8Els3/axhy3rAXTkGqa8
+  muFENaBGDyZcDM/91EqC5tpFnFAHttKPPuiENyC4xb66JXWs+yKMfZ9Lbl8R
+  oaNCLJSQua0V8/hxH76b3jg7E/rWVuI/GVbKWRp+G0JJLbSEjf1P5Q+tnDTe
+  AFdEFVtWAipqbBt4yfsgKoxRzjff6ReFPsiHiDgBbKiorTTp7+ySV3mJpujp
+  UXFveIkFog86mbrOb3baMTeOx7vEOQgyRMc1VL08SzXaVsRM1ve0ADDfkK0F
+  oVkAXzCBjAYJKoZIhvcNAQcBMB0GCWCGSAFlAwQBKgQQ6PeQUxvW0MOEsKNo
+  XOJ3G4BgyAlc1uiYCik/5XCbd18K+FrLpfHNB5WTYyln7ZaeaUO1eyY5dadr
+  RO0ZcBKZ+NPI8qlNWABdTFLyQGD3jKsKR/qTTLuBzoJ6Y/YNquL7rtn8Ezed
+  ZJu0n/JJOBIZTxXR]
+foreman_proxy::dhcp_omapi_port: 7911
+foreman_proxy::dhcp_node_type: primary # primary/secondary - move to node hieradata
+foreman_proxy::dhcp_peer_address: 192.168.1.7 # 192.168.1.7/8 - move to node hieradata
+
+# We can't use foreman_proxy::dns I think because it doesn't give the customization required
+#foreman_proxy::dns: true
+#foreman_proxy::dns_managed: true
+#foreman_proxy::dns_provider: nsupdate
+#foreman_proxy::dns_zone: je.home
+#foreman_proxy::dns_reverse: 1.168.192.in-addr.arpa
+#foreman_proxy::dns_ttl: 32400
