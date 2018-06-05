@@ -169,10 +169,14 @@ class role::dnsdhcp (
       }
     }
   }
+
+  notify { 'rev_dns_hosts':
+    message => "h: ${rev_dns_hosts}",
+  }
   # Reverse DNS entries
   $rev_dns_hosts.each |$k, $v| {
     $last_octet = split($v['ip'], '.')[3]
-    notify { "last octet: ${split($v['ip'], '.')}": }
+    #notify { "last octet: ${split($v['ip'], '.')}": }
     dns_record { "Reverse DNS for ${k}":
       name    => $last_octet,
       type    => 'PTR',
