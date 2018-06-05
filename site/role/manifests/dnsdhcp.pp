@@ -11,7 +11,7 @@ class role::dnsdhcp (
   include '::keepalived'
   include '::foreman_proxy'
 
-  package { 'ipset3':
+  package { 'libipset3':
     ensure => installed,
   }
   -> Class['keepalived']
