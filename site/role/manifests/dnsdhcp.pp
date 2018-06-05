@@ -1,5 +1,6 @@
 class role::dnsdhcp (
-  Hash $hosts = {},
+  Hash                $hosts   = {},
+  Stdlib::IP::Address $checkip = $facts['ipaddress'], # The IP that is used by the Keepalived healthcheck script (DNS query)
 ) {
 
   $dns_master_ip = '192.168.1.151'
