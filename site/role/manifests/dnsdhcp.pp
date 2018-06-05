@@ -161,7 +161,6 @@ class role::dnsdhcp (
   }
 
   $rev_dns_hosts = $hosts
-
   # Remove entries from hash if rev_dns is set to true
   $hosts.each |$k, $v| {
     if has_key($v, 'rev_dns') {
@@ -172,10 +171,8 @@ class role::dnsdhcp (
   }
   # Reverse DNS entries
   $rev_dns_hosts.each |$k, $v| {
-    # TODO: HOW TO HANDLE DUPLICATES......
-    # check if hash has key rev_dns
-    # if rev_dns key exists and is false, then skip
     $last_octet = split($v['ip'], '.')[3]
+    notify { "last octet: ${last_octet}": }
     dns_record { "Reverse DNS for ${k}":
       name    => $last_octet,
       type    => 'PTR',
