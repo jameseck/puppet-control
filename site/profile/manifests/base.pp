@@ -24,12 +24,12 @@ class profile::base (
     gid    => '1000',
   }
   user { 'james':
-    ensure      => present,
-    uid         => '1000',
-    gid         => '1000',
-    home        => '/home/james',
-    manage_home => true,
-    password    => lookup('james_user_password'),
+    ensure     => present,
+    uid        => '1000',
+    gid        => '1000',
+    home       => '/home/james',
+    managehome => true,
+    password   => lookup('james_user_password'),
   }
 
   ssh_authorized_key { 'james':
