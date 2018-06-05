@@ -152,7 +152,7 @@ class role::dnsdhcp (
       require => Class['dns'],
     }
     # reverse entries
-    $last_octet = split($v['ip'])[3]
+    $last_octet = split($v['ip'], '.')[3]
     dns_record { "Reverse DNS for ${v['ip']}":
       name    => $last_octet,
       type    => 'PTR',
