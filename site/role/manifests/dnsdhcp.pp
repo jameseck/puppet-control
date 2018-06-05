@@ -9,6 +9,11 @@ class role::dnsdhcp (
   include '::keepalived'
   include '::foreman_proxy'
 
+  package { 'ipset3':
+    ensure => installed,
+  }
+  -> Class['keepalived']
+
 #  $packages = [ 'dnsutils', 'ntpdate', ]
 #  package { $packages:
 #    ensure => installed,
