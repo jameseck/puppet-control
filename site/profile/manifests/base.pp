@@ -32,7 +32,7 @@ class profile::base (
     password   => lookup('james_user_password'),
   }
 
-  ssh_authorized_key { 'james':
+  ssh_authorized_key { 'james.eckersall@jameseck-laptop.glo.gb':
     ensure => present,
     user   => 'james',
     type   => 'ssh-rsa',
