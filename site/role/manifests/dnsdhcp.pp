@@ -3,8 +3,10 @@ class role::dnsdhcp (
   Stdlib::IP::Address $checkip = $facts['ipaddress'], # The IP that is used by the Keepalived healthcheck script (DNS query)
 ) {
 
-  $dns_master_ip = '192.168.1.151'
-  $dns_slave_ip  = '192.168.1.168'
+  $dns_master_ip  = '192.168.1.7'
+  $dns_slave_ip   = '192.168.1.8'
+  $dns_vip_ip     = '192.168.1.9'
+  $dns_vip_subnet = '24'
 
   include '::keepalived'
   include '::foreman_proxy'
@@ -45,7 +47,7 @@ class role::dnsdhcp (
     priority          => '101',
     auth_type         => 'PASS',
     auth_pass         => 'secret',
-    virtual_ipaddress => [ '192.168.1.9/24' ],
+    virtual_ipaddress => [ "${dns_vip_ip}/${dns_vip_subnet}" ],
     notify_script     => '/etc/keepalived/notify-keepalived.sh',
     track_script      => 'checkscript',
   }
