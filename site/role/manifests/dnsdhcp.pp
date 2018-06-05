@@ -146,6 +146,7 @@ class role::dnsdhcp (
     dns_record { $k:
       type    => 'A',
       content => $v['ip'],
+      require => Class['dns'],
     }
     if ($v['mac'] =~ Dhcp::Macaddress) {
       dhcp::host { $k:
