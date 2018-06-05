@@ -1,6 +1,8 @@
 class role::dnsdhcp (
   Hash                $hosts   = {},
   Stdlib::IP::Address $checkip = $facts['ipaddress'], # The IP that is used by the Keepalived healthcheck script (DNS query)
+  String              $dns_zone_fwd = 'je.home',
+  String              $dns_zone_rev = '1.168.192.in-addr.arpa',
 ) {
 
   $dns_master_ip  = '192.168.1.7'
@@ -77,7 +79,7 @@ class role::dnsdhcp (
     default        => [ $dns_master_ip, ],
   }
 
-  Dns::Zone<| title == 'je.home' |> {
+  Dns::Zone<| title == $dns_zone_fwd |> {
     allow_transfer => [ 'localhost', $dns_master_ip, $dns_slave_ip, ],
     also_notify    => [ $dns_master_ip, $dns_slave_ip, ],
     masters        => $dns_masters,
@@ -89,7 +91,7 @@ class role::dnsdhcp (
 #  }
 
   #dns::zone { '1.168.192.in-addr.arpa':
-  Dns::Zone<| title == '1.168.192.in-addr.arpa' |> {
+  Dns::Zone<| title == $dns_zone_rev |> {
     allow_transfer => [ 'localhost', $dns_master_ip, $dns_slave_ip, ],
     also_notify    => [ $dns_master_ip, $dns_slave_ip, ],
     masters        => $dns_masters,
@@ -138,14 +140,24 @@ class role::dnsdhcp (
     provider => bind,
     ddns_key => '/etc/bind/rndc.key',
     server   => 'localhost',
-    ttl      => '3200',
-    domain   => 'je.home',
+    ttl      => '10800',
+    domain   => $dns_zone_fwd,
   }
 
   $hosts.each |$k, $v| {
     dns_record { $k:
       type    => 'A',
       content => $v['ip'],
+      domain  => $dns_zone_fwd,
+      require => Class['dns'],
+    }
+    # reverse entries
+    $last_octet = split($v['ip'])[3]
+    dns_record { "Reverse DNS for ${v['ip']}":
+      name    => $last_octet,
+      type    => 'PTR',
+      content => $k,
+      domain  => $dns_zone_rev,
       require => Class['dns'],
     }
     if ($v['mac'] =~ Dhcp::Macaddress) {
