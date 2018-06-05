@@ -13,7 +13,10 @@ class profile::base (
     enable => true,
   }
 
-  group { 'pi':
+  user { 'pi':
+    ensure => absent,
+  }
+  -> group { 'pi':
     ensure => absent,
   }
   -> group { 'james':
