@@ -174,7 +174,7 @@ class role::dnsdhcp (
   $rev_dns_hosts.each |$k, $v| {
     $last_octet = split($v['ip'], '\.')[3]
     dns_record { "Reverse DNS for ${k}":
-      name    => $last_octet,
+      recname => $last_octet,
       type    => 'PTR',
       content => $k,
       domain  => $dns_zone_rev,
