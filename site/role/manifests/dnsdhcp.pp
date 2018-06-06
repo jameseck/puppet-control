@@ -154,30 +154,21 @@ class role::dnsdhcp (
     }
   }
 
-  $rev_dns_hosts = $hosts
-  # Remove entries from hash if rev_dns is set to true
-  $hosts.each |$k, $v| {
-#    if has_key($v, 'rev_dns') {
-      if $v['rev_dns'] == false {
-        notify { "found rev_dns for ${k}": }
-        $rev_dns_hosts = delete($rev_dns_hosts, $k)
-      }
-#    }
+  # Remove entries from hash if rev_dns is set to false or not set
+  $rev_dns_hosts = $hosts.filter |$k, $v| {
+    $v['rev_dns'] != false
   }
 
-  notify { 'rev_dns_hosts':
-    message => "rdh ${rev_dns_hosts}",
+  # Reverse DNS entries
+  $rev_dns_hosts.each |$k, $v| {
+    $last_octet = split($v['ip'], '\.')[3]
+    dns_record { $last_octet:
+      type    => 'PTR',
+      content => "${k}.",
+      domain  => $dns_zone_rev,
+      require => Class['dns'],
+    }
   }
-#  # Reverse DNS entries
-#  $rev_dns_hosts.each |$k, $v| {
-#    $last_octet = split($v['ip'], '\.')[3]
-#    dns_record { $last_octet:
-#      type    => 'PTR',
-#      content => "${k}.",
-#      domain  => $dns_zone_rev,
-#      require => Class['dns'],
-#    }
-#  }
 
   #create_resources('dhcp::host', $dhcp_hosts)
 
