@@ -161,8 +161,8 @@ class role::dnsdhcp (
 
   # Reverse DNS entries
   $rev_dns_hosts.each |$k, $v| {
-    $last_octet = split($v['ip'], '\.')[3]
-    dns_record { $last_octet:
+    $rev_ip = join(reverse(split($v['ip'], '\.'), '\.'), '.')
+    dns_record { "${rev_ip}.in-addr.arpa":
       type    => 'PTR',
       content => "${k}.",
       domain  => $dns_zone_rev,
