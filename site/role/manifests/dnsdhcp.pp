@@ -157,11 +157,11 @@ class role::dnsdhcp (
   $rev_dns_hosts = $hosts
   # Remove entries from hash if rev_dns is set to true
   $hosts.each |$k, $v| {
-    if has_key($v, 'rev_dns') {
+#    if has_key($v, 'rev_dns') {
       if $v['rev_dns'] == false {
         delete($rev_dns_hosts, $k)
       }
-    }
+#    }
   }
 
   notify { 'rev_dns_hosts':
