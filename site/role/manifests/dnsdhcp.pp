@@ -157,7 +157,7 @@ class role::dnsdhcp (
       $rev_ip = join(reverse(split($v['ip'], '\.'), '\.'), '.')
       dns_record { "${rev_ip}.in-addr.arpa":
         type    => 'PTR',
-        content => "${k}.",
+        content => $k,
         domain  => $dns_zone_rev,
         require => Class['dns'],
       }
