@@ -164,16 +164,19 @@ class role::dnsdhcp (
     }
   }
 
-  # Reverse DNS entries
-  $rev_dns_hosts.each |$k, $v| {
-    $last_octet = split($v['ip'], '\.')[3]
-    dns_record { $last_octet:
-      type    => 'PTR',
-      content => "${k}.",
-      domain  => $dns_zone_rev,
-      require => Class['dns'],
-    }
+  notify { 'rev_dns_hosts':
+    message => "rdh ${rev_dns_hosts}",
   }
+#  # Reverse DNS entries
+#  $rev_dns_hosts.each |$k, $v| {
+#    $last_octet = split($v['ip'], '\.')[3]
+#    dns_record { $last_octet:
+#      type    => 'PTR',
+#      content => "${k}.",
+#      domain  => $dns_zone_rev,
+#      require => Class['dns'],
+#    }
+#  }
 
   #create_resources('dhcp::host', $dhcp_hosts)
 
