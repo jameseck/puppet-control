@@ -18,12 +18,6 @@ class role::dnsdhcp (
   }
   -> Class['keepalived']
 
-#  $packages = [ 'dnsutils', 'ntpdate', ]
-#  package { $packages:
-#    ensure => installed,
-#  }
-
-
   file { '/etc/keepalived/notify-keepalived.sh':
     ensure  => file,
     owner   => 'root',
@@ -173,10 +167,9 @@ class role::dnsdhcp (
   # Reverse DNS entries
   $rev_dns_hosts.each |$k, $v| {
     $last_octet = split($v['ip'], '\.')[3]
-    dns_record { "Reverse DNS for ${k}":
-      recname => $last_octet,
+    dns_record { $last_octet:
       type    => 'PTR',
-      content => $k,
+      content => "${k}.",
       domain  => $dns_zone_rev,
       require => Class['dns'],
     }
