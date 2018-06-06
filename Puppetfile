@@ -20,3 +20,6 @@ mod 'jameseck/dns_record',
   :git    => 'https://github.com/jameseck/puppet-dns_record',
   :branch => 'master'
 
+mod 'jameseck/jefirewall',
+  :git    => 'https://github.com/jameseck/puppet-jefirewall',
+  :branch => 'master'

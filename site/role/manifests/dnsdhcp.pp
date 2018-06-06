@@ -11,6 +11,7 @@ class role::dnsdhcp (
 
   include '::keepalived'
   include '::foreman_proxy'
+  include '::jefirewall'
 
   package { 'libipset3':
     ensure => installed,
