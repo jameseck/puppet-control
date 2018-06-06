@@ -152,23 +152,33 @@ class role::dnsdhcp (
       domain  => $dns_zone_fwd,
       require => Class['dns'],
     }
-  }
 
-  # Remove entries from hash if rev_dns is set to false or not set
-  $rev_dns_hosts = $hosts.filter |$k, $v| {
-    $v['rev_dns'] != false
-  }
-
-  # Reverse DNS entries
-  $rev_dns_hosts.each |$k, $v| {
-    $rev_ip = join(reverse(split($v['ip'], '\.'), '\.'), '.')
-    dns_record { "${rev_ip}.in-addr.arpa":
-      type    => 'PTR',
-      content => "${k}.",
-      domain  => $dns_zone_rev,
-      require => Class['dns'],
+    if $v['rev_dns'] != false {
+      $rev_ip = join(reverse(split($v['ip'], '\.'), '\.'), '.')
+      dns_record { "${rev_ip}.in-addr.arpa":
+        type    => 'PTR',
+        content => "${k}.",
+        domain  => $dns_zone_rev,
+        require => Class['dns'],
+      }
     }
   }
+
+###  # Remove entries from hash if rev_dns is set to false or not set
+###  $rev_dns_hosts = $hosts.filter |$k, $v| {
+###    $v['rev_dns'] != false
+###  }
+###
+###  # Reverse DNS entries
+###  $rev_dns_hosts.each |$k, $v| {
+###    $rev_ip = join(reverse(split($v['ip'], '\.'), '\.'), '.')
+###    dns_record { "${rev_ip}.in-addr.arpa":
+###      type    => 'PTR',
+###      content => "${k}.",
+###      domain  => $dns_zone_rev,
+###      require => Class['dns'],
+###    }
+###  }
 
   #create_resources('dhcp::host', $dhcp_hosts)
 
