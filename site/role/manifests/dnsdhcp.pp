@@ -159,7 +159,7 @@ class role::dnsdhcp (
   $hosts.each |$k, $v| {
 #    if has_key($v, 'rev_dns') {
       if $v['rev_dns'] == false {
-        delete($rev_dns_hosts, $k)
+        $rev_dns_hosts = delete($rev_dns_hosts, $k)
       }
 #    }
   }
