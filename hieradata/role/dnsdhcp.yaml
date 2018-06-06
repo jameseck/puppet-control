@@ -20,6 +20,7 @@ role::dnsdhcp::hosts:
     mac: 52:54:00:18:30:47
   '*.os.je.home':
     ip: 192.168.1.6
+    rev_dns: false
   dnsdhcp01.je.home:
     ip: 192.168.1.7
     mac: b8:27:eb:c2:11:56
