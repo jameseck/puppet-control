@@ -1,0 +1,31 @@
+---
+je_firewall::pre::rules:
+  '000 accept all icmp requests':
+    proto: icmp
+    action: accept
+  '001 accept all to lo interface':
+    proto: all
+    iniface: lo
+    action: accept
+  '002 accept related established rule':
+    proto: all
+    state:
+    - RELATED
+    - ESTABLISHED
+    action: accept
+  '003 accept SSH':
+    proto: tcp
+    dport: 22
+    source: 192.168.1.0/24
+    action: accept
+
+je_firewall::post::rules:
+  '900 log everything before we drop it':
+    jump: LOG
+    log_level: 6
+    log_prefix: '[IPTABLES] dropped '
+    proto: all
+#  '999 drop all':
+#    proto: all
+#    action: drop
+
