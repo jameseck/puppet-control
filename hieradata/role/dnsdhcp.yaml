@@ -8,6 +8,7 @@ role::dnsdhcp::hosts:
     mac: 52:54:00:95:86:e4
   puppet.je.home:
     ip: 192.168.1.11
+    rev_dns: false
   theforeman.je.home:
     ip: 192.168.1.11
   minecraft.je.home:
