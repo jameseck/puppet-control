@@ -150,7 +150,7 @@ dns::controls:
     allowed_addresses:
     - 127.0.0.1
     keys:
-    - rndc-key
+    - rndckey
   '*':
     port: 953
     allowed_addresses:
@@ -158,7 +158,7 @@ dns::controls:
     - "%{hiera('dns_slave_ip')}"
     - "%{hiera('dns_vip_ip')}"
     keys:
-    - rndc-key
+    - rndckey
 je_firewall::rules:
   '100 accept DNS 53/tcp':
     proto: tcp

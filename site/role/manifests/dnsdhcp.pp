@@ -14,7 +14,7 @@ class role::dnsdhcp (
   include '::foreman_proxy'
   include '::jefirewall'
 
-  dns::key { 'rndc-key':
+  dns::key { 'rndckey':
     algorithm => 'hmac-md5',
     filename  => 'rndc.key',
     keydir    => '/etc/bind',
@@ -87,7 +87,7 @@ class role::dnsdhcp (
     also_notify    => [ $dns_master_ip, $dns_slave_ip, ],
     masters        => $dns_masters,
     zonetype       => $zonetype,
-    require        => Dns::Key['rndc-key'],
+    require        => Dns::Key['rndckey'],
   }
 
   Dns::Zone<| title == $dns_zone_rev |> {
@@ -96,7 +96,7 @@ class role::dnsdhcp (
     masters        => $dns_masters,
     reverse        => true,
     zonetype       => $zonetype,
-    require        => Dns::Key['rndc-key'],
+    require        => Dns::Key['rndckey'],
   }
 
   Dns_record {
@@ -117,7 +117,7 @@ class role::dnsdhcp (
       type    => 'A',
       content => $v['ip'],
       domain  => $dns_zone_fwd,
-      require => [ Class['dns::service'], Dns::Key['rndc-key'], ],
+      require => [ Class['dns::service'], Dns::Key['rndckey'], ],
     }
 
     if $v['rev_dns'] != false {
@@ -126,7 +126,7 @@ class role::dnsdhcp (
         type    => 'PTR',
         content => $k,
         domain  => $dns_zone_rev,
-        require => [ Class['dns::service'], Dns::Key['rndc-key'], ],
+        require => [ Class['dns::service'], Dns::Key['rndckey'], ],
       }
     }
   }
