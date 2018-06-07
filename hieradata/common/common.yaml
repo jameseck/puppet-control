@@ -112,3 +112,8 @@ james_user_ssh_pub_key: >
     RsJ2mexdMpRCy/f2cSLV/LHrBGDsGAIT+uY3NkxTvEjnIGzQk5Dxhj5f/WdP
     cEO3Y+TqVBal3+BdQManzPPoyX4N2u+ivj7q29SbIcU=]
 
+ssh::server_options:
+    UseDNS: no
+    PermitRootLogin: without-password
+    PasswordAuthentication: yes
+
