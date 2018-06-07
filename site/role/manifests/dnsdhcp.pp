@@ -21,6 +21,7 @@ class role::dnsdhcp (
     keysize   => 512,
     secret    => $dns_rndc_key,
   }
+  -> Class['foreman_proxy']
 
   package { 'libipset3':
     ensure => installed,
@@ -87,6 +88,7 @@ class role::dnsdhcp (
     also_notify    => [ $dns_master_ip, $dns_slave_ip, ],
     masters        => $dns_masters,
     zonetype       => $zonetype,
+    require        => Dns::Key['rndc-key'],
   }
 
   Dns::Zone<| title == $dns_zone_rev |> {
@@ -95,6 +97,7 @@ class role::dnsdhcp (
     masters        => $dns_masters,
     reverse        => true,
     zonetype       => $zonetype,
+    require        => Dns::Key['rndc-key'],
   }
 
   Dns_record {
@@ -102,6 +105,7 @@ class role::dnsdhcp (
     ddns_key => '/etc/bind/rndc.key',
     server   => 'localhost',
     ttl      => '10800',
+    require  => Dns::Key['rndc-key'],
   }
 
   $hosts.each |$k, $v| {
