@@ -1,0 +1,4 @@
+---
+foreman_proxy::dhcp_node_type: secondary
+foreman_proxy::dhcp_peer_address: 192.168.1.7
+

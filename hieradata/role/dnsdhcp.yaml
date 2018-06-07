@@ -1,4 +1,11 @@
 ---
+dns_master_ip: 192.168.1.7
+dns_slave_ip: 192.168.1.8
+dns_vip_ip: 192.168.1.9
+
+role::dnsdhcp::dns_master_ip: "%{hiera('dns_master_ip')}"
+role::dnsdhcp::dns_slave_ip: "%{hiera('dns_slave_ip')}"
+role::dnsdhcp::dns_vip_ip: "%{hiera('dns_vip_ip')}"
 role::dnsdhcp::hosts:
   erx.je.home:
     ip: 192.168.1.1
@@ -8,6 +15,7 @@ role::dnsdhcp::hosts:
     mac: 52:54:00:95:86:e4
   puppet.je.home:
     ip: 192.168.1.11
+    rev_dns: false
   theforeman.je.home:
     ip: 192.168.1.11
   minecraft.je.home:
@@ -19,6 +27,7 @@ role::dnsdhcp::hosts:
     mac: 52:54:00:18:30:47
   '*.os.je.home':
     ip: 192.168.1.6
+    rev_dns: false
   dnsdhcp01.je.home:
     ip: 192.168.1.7
     mac: b8:27:eb:c2:11:56
@@ -123,3 +132,42 @@ foreman_proxy::dns_provider: nsupdate
 foreman_proxy::dns_zone: je.home
 foreman_proxy::dns_reverse: 1.168.192.in-addr.arpa
 foreman_proxy::dns_ttl: 32400
+dns::controls:
+  '127.0.0.1':
+    port: 953
+    allowed_addresses:
+    - 127.0.0.1
+    keys:
+    - rndc-key
+  '*':
+    port: 953
+    allowed_addresses:
+    - "%{hiera('dns_master_ip')}"
+    - "%{hiera('dns_slave_ip')}"
+    - "%{hiera('dns_vip_ip')}"
+    keys:
+    - rndc-key
+je_firewall::rules:
+  '100 accept DNS 53/tcp':
+    proto: tcp
+    dport: 53
+    source: 192.168.1.0/24
+  '100 accept DNS 53/udp':
+    proto: udp
+    dport: 53
+    source: 192.168.1.0/24
+  '101 accept DHCP 67-68/udp':
+    proto: udp
+    dport: 67-68
+  "102 accept 519/tcp from %{hiera('dns_master_ip')}":
+    proto: tcp
+    dport: 519
+    source: "%{hiera('dns_master_ip')}"
+  "103 accept 519/tcp from %{hiera('dns_slave_ip')}":
+    proto: tcp
+    dport: 519
+    source: "%{hiera('dns_slave_ip')}"
+  "104 accept 519/tcp from %{hiera('dns_vip_ip')}":
+    proto: tcp
+    dport: 519
+    source: "%{hiera('dns_vip_ip')}"
