@@ -105,7 +105,6 @@ class role::dnsdhcp (
     ddns_key => '/etc/bind/rndc.key',
     server   => 'localhost',
     ttl      => '10800',
-    require  => Dns::Key['rndc-key'],
   }
 
   $hosts.each |$k, $v| {
@@ -119,7 +118,7 @@ class role::dnsdhcp (
       type    => 'A',
       content => $v['ip'],
       domain  => $dns_zone_fwd,
-      require => Class['dns'],
+      require => [ Class['dns'], Dns::Key['rndc-key'], ],
     }
 
     if $v['rev_dns'] != false {
@@ -128,7 +127,7 @@ class role::dnsdhcp (
         type    => 'PTR',
         content => $k,
         domain  => $dns_zone_rev,
-        require => Class['dns'],
+        require => [ Class['dns'], Dns::Key['rndc-key'], ],
       }
     }
   }
