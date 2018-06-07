@@ -128,6 +128,21 @@ foreman_proxy::dns_provider: nsupdate
 foreman_proxy::dns_zone: je.home
 foreman_proxy::dns_reverse: 1.168.192.in-addr.arpa
 foreman_proxy::dns_ttl: 32400
+dns::controls:
+  '127.0.0.1':
+    port: 953
+    allowed_addresses:
+    - 127.0.0.1
+    keys:
+    - rndc-key
+  '192.168.1.0/24':
+    port: 953
+    allowed_addresses:
+    - 192.168.1.7
+    - 192.168.1.8
+    - 192.168.1.9
+    keys:
+    - rndc-key
 je_firewall::rules:
   '100 accept DNS 53/tcp':
     proto: tcp
