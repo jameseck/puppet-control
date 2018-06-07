@@ -7,11 +7,20 @@ class role::dnsdhcp (
   Stdlib::IP::Address $dns_slave_ip   = undef,
   Integer             $dns_vip_subnet = 24,
   Stdlib::IP::Address $dns_vip_ip     = undef,
+  String              $dns_rndc_key   = undef,
 ) {
 
   include '::keepalived'
   include '::foreman_proxy'
   include '::jefirewall'
+
+  dns::key { 'rndc-key':
+    algorithm => 'hmac-md5',
+    filename  => 'rndc.key',
+    keydir    => '/etc/bind',
+    keysize   => 512,
+    secret    => $dns_rndc_key,
+  }
 
   package { 'libipset3':
     ensure => installed,
