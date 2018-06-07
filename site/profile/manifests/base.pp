@@ -44,4 +44,11 @@ class profile::base (
     key    => lookup('james_user_ssh_pub_key'),
   }
 
+  ssh_authorized_key { 'james.eckersall@jameseck-laptop.glo.gb':
+    ensure => present,
+    user   => 'root',
+    type   => 'ssh-rsa',
+    key    => lookup('james_user_ssh_pub_key'),
+  }
+
 }
