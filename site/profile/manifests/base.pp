@@ -32,6 +32,10 @@ class profile::base (
     password   => lookup('james_user_password'),
   }
 
+  user { 'root':
+    password => lookup('root_user_password'),
+  }
+
   ssh_authorized_key { 'james.eckersall@jameseck-laptop.glo.gb':
     ensure => present,
     user   => 'james',
