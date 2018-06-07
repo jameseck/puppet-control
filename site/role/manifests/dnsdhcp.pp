@@ -75,7 +75,7 @@ class role::dnsdhcp (
   # Set $dns_masters to empty array if this is the dns master node
   $dns_masters = $::ipaddress ? {
     $dns_master_ip => [],
-    default        => [ $::ipaddress, ],
+    default        => [ $dns_master_ip, ],
   }
 
   $zonetype = $dns_masters ? {
