@@ -138,9 +138,9 @@ dns::controls:
   '*':
     port: 953
     allowed_addresses:
-    - 192.168.1.7
-    - 192.168.1.8
-    - 192.168.1.9
+    - "%{hiera('dns_master_ip')}"
+    - "%{hiera('dns_slave_ip')}"
+    - "%{hiera('dns_vip_ip')}"
     keys:
     - rndc-key
 je_firewall::rules:
