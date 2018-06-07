@@ -18,8 +18,8 @@ class role::dnsdhcp (
 
   apt::source { 'foreman':
     location => 'http://deb.theforeman.org/',
-    release  => '1.17',
-    repos    => 'stretch',
+    repos    => '1.17',
+    release  => 'stretch',
     key      => {
       'id'     => 'AE0AF310E2EA96B6B6F4BD726F8600B9563278F6',
       'source' => 'https://deb.theforeman.org/pubkey.gpg',
