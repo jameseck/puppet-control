@@ -20,6 +20,7 @@ class role::dnsdhcp (
     keydir    => '/etc/bind',
     keysize   => 512,
     secret    => $dns_rndc_key,
+    notify    => Class['dns::service'],
   }
 
   package { 'libipset3':
