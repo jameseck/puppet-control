@@ -45,8 +45,8 @@ class role::dnsdhcp (
   keepalived::vrrp::instance { 'VI_DNS':
     interface         => 'eth0',
     state             => 'MASTER',
-    virtual_router_id => '51',
-    priority          => '101',
+    virtual_router_id => 51,
+    priority          => 101,
     auth_type         => 'PASS',
     auth_pass         => 'secret',
     virtual_ipaddress => [ "${dns_vip_ip}/${dns_vip_subnet}" ],
