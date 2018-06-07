@@ -21,7 +21,7 @@ class role::dnsdhcp (
     release  => '1.17',
     repos    => 'stretch',
     key      => {
-      'id'     => '1DCB15D12CA140EEF4947E5766CF053FE775FF07',
+      'id'     => 'AE0AF310E2EA96B6B6F4BD726F8600B9563278F6',
       'source' => 'https://deb.theforeman.org/pubkey.gpg',
     },
   }
