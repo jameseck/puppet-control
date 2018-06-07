@@ -25,7 +25,7 @@ class role::dnsdhcp (
     release  => '1.17',
     repos    => 'stretch',
   }
-  -> Class['foreman-proxy']
+  -> Class['foreman_proxy']
 
   dns::key { 'rndckey':
     algorithm => 'hmac-md5',
