@@ -37,14 +37,14 @@ class profile::base (
     password => lookup('root_user_password'),
   }
 
-  ssh_authorized_key { 'james.eckersall@jameseck-laptop.glo.gb':
+  ssh_authorized_key { 'james - james.eckersall@jameseck-laptop.glo.gb':
     ensure => present,
     user   => 'james',
     type   => 'ssh-rsa',
     key    => lookup('james_user_ssh_pub_key'),
   }
 
-  ssh_authorized_key { 'james.eckersall@jameseck-laptop.glo.gb':
+  ssh_authorized_key { 'root - james.eckersall@jameseck-laptop.glo.gb':
     ensure => present,
     user   => 'root',
     type   => 'ssh-rsa',
