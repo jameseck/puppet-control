@@ -14,6 +14,19 @@ class role::dnsdhcp (
   include '::foreman_proxy'
   include '::jefirewall'
 
+#deb http://deb.theforeman.org/ stretch 1.17
+
+  apt::key { 'foreman':
+    ensure => present,
+    source => 'https://deb.theforeman.org/pubkey.gpg',
+  }
+  -> apt::source { 'foreman':
+    location => 'http://deb.theforeman.org/',
+    release  => '1.17',
+    repos    => 'stretch',
+  }
+  -> Class['foreman-proxy']
+
   dns::key { 'rndckey':
     algorithm => 'hmac-md5',
     filename  => 'rndc.key',
