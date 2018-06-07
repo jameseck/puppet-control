@@ -68,10 +68,16 @@ class role::dnsdhcp (
     default        => [ $::ipaddress, ],
   }
 
+  $zonetype = $dns_masters ? {
+    []      => 'master',
+    default => 'slave',
+  }
+
   Dns::Zone<| title == $dns_zone_fwd |> {
     allow_transfer => [ 'localhost', $dns_master_ip, $dns_slave_ip, ],
     also_notify    => [ $dns_master_ip, $dns_slave_ip, ],
     masters        => $dns_masters,
+    zonetype       => $zonetype,
   }
 
   Dns::Zone<| title == $dns_zone_rev |> {
@@ -79,6 +85,7 @@ class role::dnsdhcp (
     also_notify    => [ $dns_master_ip, $dns_slave_ip, ],
     masters        => $dns_masters,
     reverse        => true,
+    zonetype       => $zonetype,
   }
 
   Dns_record {
