@@ -23,7 +23,6 @@ class role::dnsdhcp (
     key      => {
       'id'     => '1DCB15D12CA140EEF4947E5766CF053FE775FF07',
       'source' => 'https://deb.theforeman.org/pubkey.gpg',
-      'server' => 'pgp.mit.edu',
     },
   }
   -> Class['foreman_proxy']
