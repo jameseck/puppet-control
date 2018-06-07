@@ -19,7 +19,7 @@ class role::dnsdhcp (
   apt::key { 'foreman':
     ensure => present,
     source => 'https://deb.theforeman.org/pubkey.gpg',
-    server => '',
+    server => 'pgp.mit.edu',
   }
   -> apt::source { 'foreman':
     location => 'http://deb.theforeman.org/',
