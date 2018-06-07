@@ -135,7 +135,7 @@ dns::controls:
     - 127.0.0.1
     keys:
     - rndc-key
-  '192.168.1.0/24':
+  '*':
     port: 953
     allowed_addresses:
     - 192.168.1.7
