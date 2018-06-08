@@ -97,11 +97,14 @@ class role::dnsdhcp (
   }
 
   Dns::Zone<| title == $dns_zone_fwd |> {
-    allow_transfer => [ 'localhost', $dns_master_ip, $dns_slave_ip, ],
-    also_notify    => [ $dns_master_ip, $dns_slave_ip, ],
-    masters        => $dns_masters,
-    zonetype       => $zonetype,
-    require        => Dns::Key['rndckey'],
+    allow_transfer      => [ 'localhost', $dns_master_ip, $dns_slave_ip, ],
+    also_notify         => [ $dns_master_ip, $dns_slave_ip, ],
+    masters             => $dns_masters,
+    zonetype            => $zonetype,
+    require             => Dns::Key['rndckey'],
+    update_policy_rules => {
+      'rndckey' => { 'matchtype' => 'zonesub', },
+    },
   }
 
   Dns::Zone<| title == $dns_zone_rev |> {
