@@ -154,6 +154,8 @@ dns::controls:
   '*':
     port: 953
     allowed_addresses:
+    - localhost
+    - 127.0.0.1
     - "%{hiera('dns_master_ip')}"
     - "%{hiera('dns_slave_ip')}"
     - "%{hiera('dns_vip_ip')}"
