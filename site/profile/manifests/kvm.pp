@@ -14,9 +14,10 @@ class profile::kvm (
     value => 'serial'
   }
 
-  grub_config { 'GRUB_SERIAL_COMMAND':
-    value => 'serial --unit=0 --speed=38400 --word=8 --parity=no --stop=1',
+  file_line { 'grub serial command':
+    path  => '/etc/default/grub',
+    match =>  '^GRUB_SERIAL_COMMAND=',
+    line  => 'GRUB_SERIAL_COMMAND="serial --unit=0 --speed=38400 --word=8 --parity=no --stop=1"',
   }
-
 
 }
