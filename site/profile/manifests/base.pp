@@ -4,6 +4,10 @@ class profile::base (
 
   include '::ntp'
 
+  if $facts['virtual'] == 'kvm' {
+    include '::profile::kvm'
+  }
+
   package { $packages:
     ensure => installed,
   }
