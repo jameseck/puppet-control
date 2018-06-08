@@ -103,7 +103,7 @@ class role::dnsdhcp (
     zonetype            => $zonetype,
     require             => Dns::Key['rndckey'],
     update_policy_rules => {
-      'rndckey' => { 'matchtype' => 'zonesub', },
+      'rndckey' => { 'matchtype' => 'zonesub', 'rr' => 'ANY', },
     },
   }
 
