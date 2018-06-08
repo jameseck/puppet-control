@@ -15,7 +15,7 @@ class profile::kvm (
   }
 
   grub_config { 'GRUB_SERIAL_COMMAND':
-    value => '\"serial --unit=0 --speed=38400 --word=8 --parity=no --stop=1\"',
+    value => 'serial --unit=0 --speed=38400 --word=8 --parity=no --stop=1',
   }
 
 
