@@ -22,7 +22,7 @@ class profile::kvm (
   }
 
   exec { 'grub2-mkconfig':
-    command     => '/usr/sbin/grub2-mkconfig /boot/grub/grub2.cfg',
+    command     => '/usr/sbin/grub2-mkconfig /boot/grub2/grub.cfg',
     refreshonly => true,
   }
 
