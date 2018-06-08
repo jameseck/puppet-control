@@ -7,11 +7,34 @@ class role::dnsdhcp (
   Stdlib::IP::Address $dns_slave_ip   = undef,
   Integer             $dns_vip_subnet = 24,
   Stdlib::IP::Address $dns_vip_ip     = undef,
+  String              $dns_rndc_key   = undef,
 ) {
 
   include '::keepalived'
   include '::foreman_proxy'
   include '::jefirewall'
+
+#deb http://deb.theforeman.org/ stretch 1.17
+
+  apt::source { 'foreman':
+    location => 'http://deb.theforeman.org/',
+    repos    => '1.17',
+    release  => 'stretch',
+    key      => {
+      'id'     => 'AE0AF310E2EA96B6B6F4BD726F8600B9563278F6',
+      'source' => 'https://deb.theforeman.org/pubkey.gpg',
+    },
+  }
+  -> Class['foreman_proxy']
+
+  dns::key { 'rndckey':
+    algorithm => 'hmac-md5',
+    filename  => 'rndc.key',
+    keydir    => '/etc/bind',
+    keysize   => 512,
+    secret    => $dns_rndc_key,
+    notify    => Class['dns::service'],
+  }
 
   package { 'libipset3':
     ensure => installed,
@@ -39,8 +62,8 @@ class role::dnsdhcp (
   keepalived::vrrp::instance { 'VI_DNS':
     interface         => 'eth0',
     state             => 'MASTER',
-    virtual_router_id => '51',
-    priority          => '101',
+    virtual_router_id => 51,
+    priority          => 101,
     auth_type         => 'PASS',
     auth_pass         => 'secret',
     virtual_ipaddress => [ "${dns_vip_ip}/${dns_vip_subnet}" ],
@@ -65,7 +88,7 @@ class role::dnsdhcp (
   # Set $dns_masters to empty array if this is the dns master node
   $dns_masters = $::ipaddress ? {
     $dns_master_ip => [],
-    default        => [ $::ipaddress, ],
+    default        => [ $dns_master_ip, ],
   }
 
   $zonetype = $dns_masters ? {
@@ -78,6 +101,7 @@ class role::dnsdhcp (
     also_notify    => [ $dns_master_ip, $dns_slave_ip, ],
     masters        => $dns_masters,
     zonetype       => $zonetype,
+    require        => Dns::Key['rndckey'],
   }
 
   Dns::Zone<| title == $dns_zone_rev |> {
@@ -86,6 +110,7 @@ class role::dnsdhcp (
     masters        => $dns_masters,
     reverse        => true,
     zonetype       => $zonetype,
+    require        => Dns::Key['rndckey'],
   }
 
   Dns_record {
@@ -106,7 +131,7 @@ class role::dnsdhcp (
       type    => 'A',
       content => $v['ip'],
       domain  => $dns_zone_fwd,
-      require => Class['dns'],
+      require => [ Class['dns::service'], Dns::Key['rndckey'], ],
     }
 
     if $v['rev_dns'] != false {
@@ -115,7 +140,7 @@ class role::dnsdhcp (
         type    => 'PTR',
         content => $k,
         domain  => $dns_zone_rev,
-        require => Class['dns'],
+        require => [ Class['dns::service'], Dns::Key['rndckey'], ],
       }
     }
   }

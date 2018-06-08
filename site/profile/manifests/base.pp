@@ -3,6 +3,7 @@ class profile::base (
 ) {
 
   include '::ntp'
+  include '::ssh'
 
   if $facts['virtual'] == 'kvm' {
     include '::profile::kvm'
@@ -36,9 +37,20 @@ class profile::base (
     password   => lookup('james_user_password'),
   }
 
-  ssh_authorized_key { 'james.eckersall@jameseck-laptop.glo.gb':
+  user { 'root':
+    password => lookup('root_user_password'),
+  }
+
+  ssh_authorized_key { 'james - james.eckersall@jameseck-laptop.glo.gb':
     ensure => present,
     user   => 'james',
+    type   => 'ssh-rsa',
+    key    => lookup('james_user_ssh_pub_key'),
+  }
+
+  ssh_authorized_key { 'root - james.eckersall@jameseck-laptop.glo.gb':
+    ensure => present,
+    user   => 'root',
     type   => 'ssh-rsa',
     key    => lookup('james_user_ssh_pub_key'),
   }

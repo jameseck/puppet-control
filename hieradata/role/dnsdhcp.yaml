@@ -3,6 +3,17 @@ dns_master_ip: 192.168.1.7
 dns_slave_ip: 192.168.1.8
 dns_vip_ip: 192.168.1.9
 
+role::dnsdhcp::dns_rndc_key: >
+  ENC[PKCS7,MIIBiQYJKoZIhvcNAQcDoIIBejCCAXYCAQAxggEhMIIBHQIBADAFMAACAQEw
+  DQYJKoZIhvcNAQEBBQAEggEAa9x+HUyA5ksRFB2JbBSfUNmq06QFvOn+FASS
+  v5goK44bN5MXz5CA94OQGVqb3uDRTP/DggGOVOq0VQA8tPyz1Nr1FUpAVgoB
+  QD6s7TNq3lSHSC1DAkyiPL5PJKnJAw5P2SnzuDb/ooRDZCsatKi3e3bFtQuq
+  vBdO2uME72/jvw71AFuUTjzoyHsZBh1DJ7kzUkaxZ9cd5j6sVQfw/C4PzboZ
+  7/ctem6IArUy2vv6+TFTm/j2MfXDOgpl99b2FgXumdqGohZ+Au8CT0gQIr79
+  8MnsSvsVCL2cyevKjWed1kzyj7L7GMknlj7x6pv6pUUq4n9MR5d36yRSHvHa
+  YuwMbzBMBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBChhVt1djSmeuZhH+0p
+  dlD9gCDmf5SNXdjBVkT+AVgspY7+KqHCTN9RsroufQF6hVDFUw==]
+
 role::dnsdhcp::dns_master_ip: "%{hiera('dns_master_ip')}"
 role::dnsdhcp::dns_slave_ip: "%{hiera('dns_slave_ip')}"
 role::dnsdhcp::dns_vip_ip: "%{hiera('dns_vip_ip')}"
@@ -132,13 +143,14 @@ foreman_proxy::dns_provider: nsupdate
 foreman_proxy::dns_zone: je.home
 foreman_proxy::dns_reverse: 1.168.192.in-addr.arpa
 foreman_proxy::dns_ttl: 32400
+dns::rndckeypath: /etc/bind/notused.key
 dns::controls:
   '127.0.0.1':
     port: 953
     allowed_addresses:
     - 127.0.0.1
     keys:
-    - rndc-key
+    - rndckey
   '*':
     port: 953
     allowed_addresses:
@@ -146,7 +158,7 @@ dns::controls:
     - "%{hiera('dns_slave_ip')}"
     - "%{hiera('dns_vip_ip')}"
     keys:
-    - rndc-key
+    - rndckey
 je_firewall::rules:
   '100 accept DNS 53/tcp':
     proto: tcp
