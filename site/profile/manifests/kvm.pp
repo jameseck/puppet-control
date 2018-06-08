@@ -15,9 +15,15 @@ class profile::kvm (
   }
 
   file_line { 'grub serial command':
-    path  => '/etc/default/grub',
-    match =>  '^GRUB_SERIAL_COMMAND=',
-    line  => 'GRUB_SERIAL_COMMAND="serial --unit=0 --speed=38400 --word=8 --parity=no --stop=1"',
+    path   => '/etc/default/grub',
+    match  =>  '^GRUB_SERIAL_COMMAND=',
+    line   => 'GRUB_SERIAL_COMMAND="serial --unit=0 --speed=38400 --word=8 --parity=no --stop=1"',
+    notify => Exec['grub2-mkconfig'],
+  }
+
+  exec { 'grub2-mkconfig':
+    command     => '/usr/sbin/grub2-mkconfig /boot/grub/grub2.cfg',
+    refreshonly => true,
   }
 
 }
