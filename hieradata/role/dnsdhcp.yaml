@@ -116,7 +116,7 @@ foreman_proxy::dhcp_netmask: 255.255.255.0
 foreman_proxy::dhcp_failover: 'dhcp-failover'
 foreman_proxy::dhcp_nameservers: 192.168.1.2 # change to .9
 foreman_proxy::dhcp_pxeserver: 192.168.1.2 # change to .11 (theforeman) or dnsdhcp vip
-foreman_proxy::dhcp_config: /etc/dhcp/dhcpd.pools
+foreman_proxy::dhcp_config: /etc/dhcp/dhcpd.conf
 foreman_proxy::dhcp_leases: /var/lib/dhcp/dhcpd.leases
 foreman_proxy::dhcp_key_name: omapi-key
 # omapi key
