@@ -93,6 +93,7 @@ dhcp::ntpservers:
 foreman_proxy::foreman_base_url: https://theforeman.je.home
 foreman_proxy::trusted_hosts:
 - theforeman.je.home
+- puppet.je.home
 - "%{facts.fqdn}"
 foreman_proxy::http: true
 foreman_proxy::puppet: false
