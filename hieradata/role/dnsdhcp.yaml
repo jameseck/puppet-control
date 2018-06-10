@@ -92,6 +92,7 @@ dhcp::ntpservers:
 - 3.uk.pool.ntp.org
 foreman_proxy::trusted_hosts:
 - theforeman.je.home
+- "%{fqdn}"
 foreman_proxy::http: true
 foreman_proxy::puppet: false
 foreman_proxy::puppetca: false
