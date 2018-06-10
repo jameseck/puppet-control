@@ -185,3 +185,7 @@ je_firewall::rules:
     proto: tcp
     dport: 519
     source: "%{hiera('dns_vip_ip')}"
+  '105 accept 8443/tcp from 192.168.1.11':
+    proto: tcp
+    dport: 8443
+    source: 192.168.1.11
