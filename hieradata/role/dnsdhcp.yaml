@@ -90,6 +90,8 @@ dhcp::ntpservers:
 - 1.uk.pool.ntp.org
 - 2.uk.pool.ntp.org
 - 3.uk.pool.ntp.org
+foreman_proxy::trusted_hosts:
+- theforeman.je.home
 foreman_proxy::puppet: false
 foreman_proxy::puppetca: false
 foreman_proxy::tftp: false
