@@ -105,7 +105,7 @@ foreman_proxy::dhcp: true
 foreman_proxy::dhcp_managed: true
 foreman_proxy::dhcp_provider: isc
 foreman_proxy::dhcp_subnets:
-- 192.168.1.0/24
+- 192.168.1.0
 foreman_proxy::dhcp_search_domains:
 - je.home
 foreman_proxy::dhcp_option_domains:
