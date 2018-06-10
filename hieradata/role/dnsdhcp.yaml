@@ -145,7 +145,7 @@ foreman_proxy::dhcp_peer_address: 192.168.1.7 # 192.168.1.7/8 - move to node hie
 # We can't use foreman_proxy::dns I think because it doesn't give the customization required
 foreman_proxy::dns: true
 foreman_proxy::dns_managed: true
-foreman_proxy::dns_listen_on: both
+foreman_proxy::dns_listen_on: true
 foreman_proxy::dns_provider: nsupdate
 foreman_proxy::dns_zone: je.home
 foreman_proxy::dns_reverse: 1.168.192.in-addr.arpa
