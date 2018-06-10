@@ -90,6 +90,7 @@ dhcp::ntpservers:
 - 1.uk.pool.ntp.org
 - 2.uk.pool.ntp.org
 - 3.uk.pool.ntp.org
+foreman_proxy::foreman_base_url: https://theforeman.je.home
 foreman_proxy::trusted_hosts:
 - theforeman.je.home
 - "%{facts.fqdn}"
