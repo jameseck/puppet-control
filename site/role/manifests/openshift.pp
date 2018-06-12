@@ -1,6 +1,8 @@
 class role::openshift (
 ) {
 
+  include '::profile::epel'
+
   $packages = [
     'git',
     'net-tools',
@@ -23,6 +25,7 @@ class role::openshift (
   package { $epel_packages:
     ensure          => installed,
     install_options => '--enablerepo=epel',
+    require         => Class['profile::epel'],
   }
 
 }
