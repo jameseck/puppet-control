@@ -1,5 +1,6 @@
 class role::openshift (
   String[1] $release = '3.9',
+  Hash      $openshift_users = {},
 ) {
 
   include '::profile::epel'
@@ -36,5 +37,19 @@ class role::openshift (
     source   => 'https://github.com/openshift/openshift-ansible',
     revision => "release-${release}",
   }
+
+  $openshift_users.each |$k, $v|  {
+    httpauth { $k:
+      ensure    => present,
+      file      => '/etc/origin_htpasswd_source',
+      password  => $v,
+      realm     => 'realm',
+      mechanism => 'basic',
+    }
+  }
+
+  # parameterise ansible inventory file
+  # deal with pv's for metrics, logging, registry, etc
+
 
 }

@@ -1,2 +1,15 @@
 ---
 profile::epel::enabled: false
+role::openshift::openshift_users:
+  'james': >
+    ENC[PKCS7,MIIBmQYJKoZIhvcNAQcDoIIBijCCAYYCAQAxggEhMIIBHQIBADAFMAACAQEw
+    DQYJKoZIhvcNAQEBBQAEggEAci74xHFtB5LqkgVvp6WtXJK3+mZr5MjY6fz8
+    DAOgo5/tEjYn+NDDN2hgsRsEkORNJwF2fE8Kznkco3g2fu80vicptLvecwyp
+    MancCHYIz1SXqw0ey7rUU3i4GFx2xmKWAZL0iih8G+qE1u21qu/JUviE9ZNj
+    2ZkeB2pPdv2GID7P7Pau25z6CV501Kj4s/9MWxgAAnZnrsPoxSmzIhl500GP
+    E1Ne6ivSN8dpzuzj8+oWKAcz2qOsOedpoDRpUdbRPYfqksHxCprMb53MtCXx
+    RQK0InaqkavZS46rwjyru2I4DdDVsU1BkAub1hSiOR7hSo7VbDVh48yMWB7A
+    KuSf/DBcBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBBPcOW0x+w6kHY0nPaR
+    ENtKgDCmLcUXCw9vkPFTVfyI4/79j3wpFWUXBhll5dij2aV9ebbbQ88qYKhg
+    X7XNgGlWc/Q=]
+
