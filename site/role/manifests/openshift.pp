@@ -20,7 +20,7 @@ class role::openshift (
     ensure => installed,
   }
 
-  $epel_packages = [ 'ansible, pyOpenSSL', ]
+  $epel_packages = [ 'ansible', 'pyOpenSSL', ]
 
   package { $epel_packages:
     ensure          => installed,
