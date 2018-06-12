@@ -1,4 +1,4 @@
-class role::dnsdhcp (
+class role::openshift (
 ) {
 
 }
