@@ -21,6 +21,7 @@ mod 'puppetlabs-docker', '1.1.0'
 mod 'herculesteam-augeasproviders_core', '2.1.4'
 mod 'herculesteam-augeasproviders_grub', '3.0.1'
 mod 'saz-ssh', '3.0.1'
+mod 'jamtur01-httpauth', '0.0.3'
 
 mod 'jameseck/dns_record',
   :git    => 'https://github.com/jameseck/puppet-dns_record',
