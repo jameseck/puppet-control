@@ -1,7 +1,9 @@
 class role::openshift (
+  String[1] $release = '3.9',
 ) {
 
   include '::profile::epel'
+  include '::docker'
 
   $packages = [
     'git',
@@ -32,7 +34,7 @@ class role::openshift (
     ensure   => present,
     provider => 'git',
     source   => 'https://github.com/openshift/openshift-ansible',
-    revision => 'release-3.9',
+    revision => "release-${release}",
   }
 
 }
