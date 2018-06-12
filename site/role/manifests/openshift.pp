@@ -48,6 +48,18 @@ class role::openshift (
     }
   }
 
+  # Generate self-signed SSL for initial bootstrapping
+  $openshift_named_cert = 'openshift.apps.letitbleed.org'
+  $cert_file = "/opt/openshift_certs/${openshift_named_cert}.pem"
+  $key_file  = "/opt/openshift_certs/${openshift_named_cert}.key"
+
+  openssl::certificate::x509 { $openshift_named_cert:
+    country      => 'UK',
+    organization => 'JE',
+    commonname   => $openshift_named_cert,
+    base_dir     => '/opt/openshift_certs',
+  }
+
   # parameterise ansible inventory file
   # deal with pv's for metrics, logging, registry, etc
 
