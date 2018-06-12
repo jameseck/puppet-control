@@ -50,14 +50,21 @@ class role::openshift (
 
   # Generate self-signed SSL for initial bootstrapping
   $openshift_named_cert = 'openshift.apps.letitbleed.org'
+  $cert_path = '/opt/openshift_certs'
   $cert_file = "/opt/openshift_certs/${openshift_named_cert}.pem"
   $key_file  = "/opt/openshift_certs/${openshift_named_cert}.key"
 
-  openssl::certificate::x509 { $openshift_named_cert:
+  file { $cert_path:
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0700',
+  }
+  -> openssl::certificate::x509 { $openshift_named_cert:
     country      => 'UK',
     organization => 'JE',
     commonname   => $openshift_named_cert,
-    base_dir     => '/opt/openshift_certs',
+    base_dir     => $cert_path,
   }
 
   # parameterise ansible inventory file
