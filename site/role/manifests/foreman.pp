@@ -1,6 +1,21 @@
 class role::foreman (
 ) {
 
+  package { 'hiera-eyaml-puppet':
+    ensure   => installed,
+    name     => 'hiera-eyaml',
+    provider => 'puppet_gem',
+  }
+  package { 'hiera-eyaml-puppetserver':
+    ensure   => installed,
+    name     => 'hiera-eyaml',
+    provider => 'puppetserver_gem',
+    notify   => Service['puppetserver'],
+  }
+  service { 'puppetserver':
+    ensure => running,
+  }
+
   class { 'r10k':
     remote          => 'https://github.com/jameseck/puppet-control',
     r10k_basedir    => '/etc/puppetlabs/code/environments',
@@ -19,20 +34,5 @@ class role::foreman (
     user            => 'root',
     group           => '0',
     require         => Class['r10k::webhook::config'],
-  }
-
-  package { 'hiera-eyaml-puppet':
-    ensure   => installed,
-    name     => 'hiera-eyaml',
-    provider => 'puppet_gem',
-  }
-  package { 'hiera-eyaml-puppetserver':
-    ensure   => installed,
-    name     => 'hiera-eyaml',
-    provider => 'puppetserver_gem',
-    notify   => Service['puppetserver'],
-  }
-  service { 'puppetserver':
-    ensure => running,
   }
 }
