@@ -16,6 +16,8 @@ mod 'puppetlabs-gcc', '0.3.0'
 mod 'puppetlabs-git', '0.5.0'
 mod 'puppetlabs-inifile', '2.2.2'
 mod 'puppetlabs/ntp',     '7.1.1'
+mod 'puppetlabs-puppetserver_gem', '1.0.0'
+
 mod 'puppetlabs-ruby', '1.0.0'
 mod 'puppetlabs/stdlib',  '4.25.1'
 mod 'puppetlabs-vcsrepo', '2.3.0'
