@@ -2,7 +2,7 @@ class role::foreman (
 ) {
 
   class { 'r10k':
-    remote          => 'https://github.com/jameseck/puppet-control.git',
+    remote          => 'https://github.com/jameseck/puppet-control',
     r10k_basedir    => '/etc/puppetlabs/code/environments',
     provider        => 'puppet_gem',
     deploy_settings => {
@@ -10,12 +10,15 @@ class role::foreman (
     }
   }
 
-  class {'r10k::webhook':
-    require => Class['r10k::webhook::config'],
-  }
-
   class { 'r10k::webhook::config':
     use_mcollective => false,
+    enable_ssl      => false,
+  }
+  -> class {'r10k::webhook':
+    use_mcollective => false,
+    user            => 'root',
+    group           => '0',
+    require         => Class['r10k::webhook::config'],
   }
 
   package { 'hiera-eyaml-puppet':
