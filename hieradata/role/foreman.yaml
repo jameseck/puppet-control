@@ -2,3 +2,16 @@
 r10k::webhook::config::public_key_path: "/etc/puppetlabs/puppet/ssl/certs/%{trusted.certname}.pem"
 r10k::webhook::config::private_key_path: "/etc/puppetlabs/puppet/ssl/private_keys/%{trusted.certname}.pem"
 r10k::webhook::config::protected: false
+r10k::webhook::slack_channel: r10k
+r10k::webhook::slack_username: r10k
+r10k::webhook::slack_webhook: >
+    ENC[PKCS7,MIIBuQYJKoZIhvcNAQcDoIIBqjCCAaYCAQAxggEhMIIBHQIBADAFMAACAQEw
+    DQYJKoZIhvcNAQEBBQAEggEAJtgjoW09Htti7FHd5E9kDhh3nNBHVyjW0Cu6
+    10C3HHT+Rf6fjcKER2L5wNmz2/uMJhVhQCjIL64v7NrphmB91m6+kMNh4sy6
+    HWJefaVQai3vXQ6T/fLNSJzFgsC+BE6ijCoMLMUCIEX7M4A/cdu5xv3uJtxB
+    N6P5MkWexz3CO5nG/ezE9umduDeXA+OHBflKTLyxtkPhANtcEN8znZASBHKH
+    DeL8lEJTssbYSSJbYYhJi7N9ONcqeKhs5Io6irH0lk1aqaKEDoNn4f5q0Y1E
+    tQNY9DGqr48Bq2cFWYxFxxSA5A/jtO1QTX+I8spupO6tImKwfOwJYsOTtnac
+    4njT4TB8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBD5W06dwhaGrLla/aH+
+    YfmtgFBpTbddMeon1swpw7x6IsWHSS09pXtmfxkrztWgtQLTro1fTud3FqEg
+    DrH3IXKhm0j5XyWsaFzEU0N7N3fWEZJVMRAbWRK8f7HD8fuXkoRMiA==]
