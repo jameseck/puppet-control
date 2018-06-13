@@ -52,7 +52,7 @@ class role::openshift (
 
   # Generate self-signed SSL for initial bootstrapping
   $base_path = '/opt/openshift'
-  $cert_file = "${base_path}/certs/${openshift_master_cluster_hostname}.pem"
+  $cert_file = "${base_path}/certs/${openshift_master_cluster_hostname}.crt"
   $key_file  = "${base_path}/certs/${openshift_master_cluster_hostname}.key"
 
   file { [ $base_path, "${base_path}/certs", "${base_path}/inventory" ]:
