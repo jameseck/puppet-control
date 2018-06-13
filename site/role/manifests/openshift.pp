@@ -33,7 +33,7 @@ class role::openshift (
     require         => Class['profile::epel'],
   }
 
-  vcsrepo { '/opt/openshift-ansible':
+  vcsrepo { '/opt/openshift/ansible':
     ensure   => present,
     provider => 'git',
     source   => 'https://github.com/openshift/openshift-ansible',
