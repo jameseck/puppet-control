@@ -1,6 +1,7 @@
 class role::foreman (
 ) {
 
+  # This is used by the r10k webhook
   package { 'slack-notifier':
     ensure   => installed,
     provider => 'puppet_gem',
