@@ -1,6 +1,10 @@
 class role::foreman (
 ) {
 
+  package { 'slack-notifier':
+    ensure   => installed,
+    provider => 'puppet_gem',
+  }
   package { 'hiera-eyaml-puppet':
     ensure   => installed,
     name     => 'hiera-eyaml',
