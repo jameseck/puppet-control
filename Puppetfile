@@ -23,6 +23,7 @@ mod 'herculesteam-augeasproviders_grub', '3.0.1'
 mod 'saz-ssh', '3.0.1'
 mod 'jamtur01-httpauth', '0.0.3'
 mod 'camptocamp-openssl', '1.10.0'
+mod 'puppet-r10k', '6.5.1'
 
 mod 'jameseck/dns_record',
   :git    => 'https://github.com/jameseck/puppet-dns_record',
