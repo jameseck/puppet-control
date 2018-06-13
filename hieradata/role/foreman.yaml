@@ -2,9 +2,9 @@
 r10k::webhook::config::public_key_path: "/etc/puppetlabs/puppet/ssl/certs/%{trusted.certname}.pem"
 r10k::webhook::config::private_key_path: "/etc/puppetlabs/puppet/ssl/private_keys/%{trusted.certname}.pem"
 r10k::webhook::config::protected: false
-r10k::webhook::slack_channel: r10k
-r10k::webhook::slack_username: r10k
-r10k::webhook::slack_webhook: >
+r10k::webhook::config::slack_channel: r10k
+r10k::webhook::config::slack_username: r10k
+r10k::webhook::config::slack_webhook: >
     ENC[PKCS7,MIIBuQYJKoZIhvcNAQcDoIIBqjCCAaYCAQAxggEhMIIBHQIBADAFMAACAQEw
     DQYJKoZIhvcNAQEBBQAEggEAJtgjoW09Htti7FHd5E9kDhh3nNBHVyjW0Cu6
     10C3HHT+Rf6fjcKER2L5wNmz2/uMJhVhQCjIL64v7NrphmB91m6+kMNh4sy6
