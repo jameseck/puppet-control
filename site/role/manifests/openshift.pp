@@ -1,6 +1,8 @@
 class role::openshift (
-  String[1] $release = '3.9',
+  String[1] $release         = '3.9',
   Hash      $openshift_users = {},
+  String[1] $openshift_master_default_subdomain = 'apps.letitbleed.org',
+  String[1] $openshift_master_cluster_hostname  = 'openshift.letitbleed.org',
 ) {
 
   include '::profile::epel'
@@ -49,26 +51,35 @@ class role::openshift (
   }
 
   # Generate self-signed SSL for initial bootstrapping
-  $openshift_named_cert = 'openshift.apps.letitbleed.org'
-  $cert_path = '/opt/openshift_certs'
-  $cert_file = "/opt/openshift_certs/${openshift_named_cert}.pem"
-  $key_file  = "/opt/openshift_certs/${openshift_named_cert}.key"
+  $base_path = '/opt/openshift'
+  $cert_file = "${base_path}/certs/${openshift_master_cluster_hostname}.pem"
+  $key_file  = "${base_path}/certs/${openshift_master_cluster_hostname}.key"
 
-  file { $cert_path:
+  file { [ $base_path, "${base_path}/certs", "${base_path}/inventory" ]:
     ensure => directory,
     owner  => 'root',
     group  => 'root',
     mode   => '0700',
   }
-  -> openssl::certificate::x509 { $openshift_named_cert:
+  -> openssl::certificate::x509 { $openshift_master_cluster_hostname:
     country      => 'UK',
     organization => 'JE',
-    commonname   => $openshift_named_cert,
-    base_dir     => $cert_path,
+    commonname   => $openshift_master_cluster_hostname,
+    base_dir     => "${base_path}/certs",
   }
 
   # parameterise ansible inventory file
   # deal with pv's for metrics, logging, registry, etc
+  $openshift_master_named_certificates = [{ 'certfile' => $cert_file, 'keyfile' => $key_file, 'cafile' => $cert_file }]
 
+  $openshift_named_certs_erb = inline_template("<% require 'json' -%><%= @openshift_master_named_certificates.to_json -%>")
+
+  file { "${base_path}/inventory/hosts":
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template('role/openshift/ansible_inventory.erb'),
+  }
 
 }
