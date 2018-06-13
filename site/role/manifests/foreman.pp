@@ -35,6 +35,7 @@ class role::foreman (
     enable_ssl      => false,
   }
   -> class {'r10k::webhook':
+    bin_template    => 'role/foreman/webhook.bin.erb',
     use_mcollective => false,
     user            => 'root',
     group           => '0',
