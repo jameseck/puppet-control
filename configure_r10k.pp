@@ -13,7 +13,7 @@ service { 'puppetserver':
   ensure => running,
 }
 class { 'r10k':
-  remote          => 'https://github.com/jameseck/puppet-control.git',
+  remote          => 'https://github.com/jameseck/puppet-control',
   r10k_basedir    => '/etc/puppetlabs/code/environments',
   provider        => 'puppet_gem',
   deploy_settings => {
