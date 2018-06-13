@@ -6,7 +6,7 @@ class profile::base (
   include '::ssh'
 
   if ( $facts['osfamily'] == 'RedHat' ) {
-    include '::epel'
+    include '::profile::epel'
   }
 
   if $facts['virtual'] == 'kvm' {
