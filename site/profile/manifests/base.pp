@@ -5,6 +5,10 @@ class profile::base (
   include '::ntp'
   include '::ssh'
 
+  if ( $facts['osfamily'] == 'RedHat' ) {
+    include '::epel'
+  }
+
   if $facts['virtual'] == 'kvm' {
     include '::profile::kvm'
   }
