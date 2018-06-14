@@ -1,6 +1,6 @@
 class role::vhost (
   String[1] $workgroup = 'jehome',
-  Variant[Struct[{user_name => String[1], password => String[1]}], Undef ] $users = undef,
+  Variant[Struct[{user_name => String[1], password => String[1]}], Undef ] $samba_users = undef,
 ) {
 
   class { 'samba::server':
@@ -10,8 +10,8 @@ class role::vhost (
     security      => 'user'
   }
 
-  if ( $users != undef ) {
-    $users.each |$k,$v| {
+  if ( $samba_users != undef ) {
+    $samba_users.each |$k,$v| {
       samba::server::user { $k:
         user_name => $v['user_name'],
         password  => $v['password'],
