@@ -19,8 +19,9 @@ class role::vhost (
 
   $shares.each |$s| {
     selinux::fcontext { "set-export-fcontext-${s}":
-      context  => 'public_content_rw_t',
-      pathname => "${s}(/.*)?",
+      ensure   => present,
+      pathspec => "${s}(/.*)?",
+      seltype  => 'public_content_rw_t',
     }
   }
 
