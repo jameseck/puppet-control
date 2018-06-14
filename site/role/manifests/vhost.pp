@@ -11,6 +11,7 @@ class role::vhost (
   }
 
   if ( $samba_users != undef ) {
+    notify { 'found users': }
     $samba_users.each |$k,$v| {
       samba::server::user { $k:
         user_name => $v['user_name'],
