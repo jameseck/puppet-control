@@ -1,0 +1,14 @@
+---
+role::vhost::samba_users:
+  james:
+    user_name: james
+    password: >
+      ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQEw
+      DQYJKoZIhvcNAQEBBQAEggEA7wnt9PtgYiI7nbhOI6zlvp2WI4la0NK73MEG
+      VtPFVtU46tzLB7hAsYpzoYBjFi6RIltvSeZNlkOdomlz/95ebWOJoyYNo4ZD
+      OMPTWWyRikdgMBJ/2+FeBgD18IMreDfyNwrxO4w8e5+qICsHwdydEx/7F0ep
+      LMP8AqXnUqL51oOqXH8TNPLzXuLfImpbi2EkuSu9zwP9OS+pX/HIodAk82LZ
+      sJFvM/que/uIx8Nu0f83+xYXI4Z+XxcVM5tXrQoD91a4e/BHK9JHg5jnn2WZ
+      u0F3v81ViYmqEdvOvBCGzu/azVinKkyUyfO2pZ2TB+biAQMfIOfasUmeFI3m
+      COtAKzA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBDGmWO+4huN1q2EP13L
+      HnBDgBCpTWsfBf+0tkM9nEhncOMI]
