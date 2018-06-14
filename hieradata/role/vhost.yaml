@@ -1,4 +1,5 @@
 ---
+role::vhost::workgroup: JEHOME
 role::vhost::samba_users:
   james:
     user_name: james

@@ -1,6 +1,6 @@
 class role::vhost (
-  String[1] $workgroup = 'jehome',
-  Variant[Struct[{user_name => String[1], password => String[1]}], Undef ] $samba_users = undef,
+  String[1]                                                               $workgroup   = 'workgroup',
+  Variant[Struct[{user_name => String[1], password => String[1]}], Undef] $samba_users = undef,
 ) {
 
   class { 'samba::server':
@@ -10,8 +10,10 @@ class role::vhost (
     security      => 'user'
   }
 
-  if ( $samba_users != undef ) {
-    notify { 'found users': }
+  notify { 'samba_users':
+    message => $samba_users,
+  }
+  if ( $samba_users !~ Undef ) {
     $samba_users.each |$k,$v| {
       samba::server::user { $k:
         user_name => $v['user_name'],
