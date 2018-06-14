@@ -37,6 +37,9 @@ mod 'theforeman-tftp', '4.1.0'
 mod 'jameseck/dns_record',
   :git    => 'https://github.com/jameseck/puppet-dns_record',
   :branch => 'master'
+mod 'jameseck/etcservices',
+  :git    => 'https://github.com/jameseck/puppet-etcservices',
+  :branch => 'master'
 mod 'jameseck/jefirewall',
   :git    => 'https://github.com/jameseck/puppet-jefirewall',
   :branch => 'master'
