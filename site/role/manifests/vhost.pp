@@ -1,13 +1,20 @@
 class role::vhost (
-  String $workgroup = 'jehome',
+  String[1] $workgroup = 'jehome',
+  Variant[Struct[{user_name => String[1], password => String[1]}], Undef ] $users = undef,
 ) {
-
 
   class { 'samba::server':
     workgroup     => $workgroup,
     server_string => $facts['fqdn'],
     interfaces    => 'lo br0',
     security      => 'user'
+  }
+
+  $users.each |$k,$v| {
+    samba::server::user { $k:
+      user_name => $v['user_name'],
+      password  => $v['password'],
+    }
   }
 
   samba::server::share { 'pool1':
