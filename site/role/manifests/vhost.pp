@@ -51,7 +51,7 @@ class role::vhost (
     guest_account => '',
     browsable     => true,
     read_only     => false,
-#    force_group   => 'root',
+    force_group   => 'root',
 #    force_user    => 'root',
     valid_users   => 'james',
 #    create_mask          => 0644,
