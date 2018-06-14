@@ -13,14 +13,12 @@ class role::vhost (
   notify { 'samba_users':
     message => $samba_users,
   }
-  if ( $samba_users !~ Undef ) {
-    $samba_users.each |$k,$v| {
-      samba::server::user { $k:
-        user_name => $v['user_name'],
-        password  => $v['password'],
-      }
-    }
-  }
+#  $samba_users.each |$k,$v| {
+#    samba::server::user { $k:
+#      user_name => $v['user_name'],
+#      password  => $v['password'],
+#    }
+#  }
 
   samba::server::share { 'pool1':
     comment       => 'pool1',
