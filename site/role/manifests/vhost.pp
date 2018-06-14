@@ -10,10 +10,12 @@ class role::vhost (
     security      => 'user'
   }
 
-  $users.each |$k,$v| {
-    samba::server::user { $k:
-      user_name => $v['user_name'],
-      password  => $v['password'],
+  if ( $users != undef ) {
+    $users.each |$k,$v| {
+      samba::server::user { $k:
+        user_name => $v['user_name'],
+        password  => $v['password'],
+      }
     }
   }
 
