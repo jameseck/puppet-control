@@ -1,7 +1,7 @@
 ---
 role::vhost::workgroup: JEHOME
 role::vhost::samba_users:
-- user_name: james
+- name: james
   password: >
     ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQEw
     DQYJKoZIhvcNAQEBBQAEggEA7wnt9PtgYiI7nbhOI6zlvp2WI4la0NK73MEG
