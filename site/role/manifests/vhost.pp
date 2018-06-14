@@ -3,6 +3,27 @@ class role::vhost (
   Array[Struct[{name => String[1], password => String[1]}]] $samba_users = undef,
 ) {
 
+  class { 'selinux':
+    mode => 'enforcing',
+    type => 'targeted',
+  }
+
+  $shares = [
+    '/export/pool1',
+    '/export/pool1/films',
+    '/export/pool1/music',
+    '/export/pool1/origin',
+    '/export/pool1/pv',
+    '/export/pool1/tv',
+  ]
+
+  $shares.each |$s| {
+    selinux::fcontext { "set-export-fcontext-${s}":
+      context  => 'public_content_rw_t',
+      pathname => "${s}(/.*)?",
+    }
+  }
+
   class { 'samba::server':
     workgroup     => $workgroup,
     server_string => $facts['fqdn'],
