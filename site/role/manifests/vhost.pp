@@ -27,12 +27,13 @@ class role::vhost (
     guest_account => '',
     browsable     => true,
     read_only     => false,
+#    force_group   => 'root',
+#    force_user    => 'root',
+    valid_users   => 'james',
 #    create_mask          => 0644,
 #    force_create_mask    => 0644,
 #    directory_mask       => 0755,
 #    force_directory_mask => 0755,
-#    force_group          => 'james',
-#    force_user           => 'james',
 #    copy                 => 'some-other-share',
   }
 
