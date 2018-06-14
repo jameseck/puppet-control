@@ -1,5 +1,12 @@
 ---
 role::vhost::workgroup: JEHOME
+role::vhost::samba_shares:
+- /export/pool1
+- /export/pool1/films
+- /export/pool1/music
+- /export/pool1/origin
+- /export/pool1/pv
+- /export/pool1/tv
 role::vhost::samba_users:
 - name: james
   password: >
