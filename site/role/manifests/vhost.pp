@@ -10,9 +10,6 @@ class role::vhost (
     security      => 'user'
   }
 
-  notify { 'samba_users':
-    message => $samba_users,
-  }
   $samba_users.each |$u| {
     samba::server::user { $u['name']:
       password  => $u['password'],
