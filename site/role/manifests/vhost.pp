@@ -1,6 +1,6 @@
 class role::vhost (
-  String[1]                                                               $workgroup   = 'workgroup',
-  Variant[Struct[{user_name => String[1], password => String[1]}], Undef] $samba_users = undef,
+  String[1]                                               $workgroup   = 'workgroup',
+  Struct[{user_name => String[1], password => String[1]}] $samba_users = undef,
 ) {
 
   class { 'samba::server':
