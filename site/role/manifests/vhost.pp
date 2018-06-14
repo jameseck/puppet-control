@@ -23,6 +23,11 @@ class role::vhost (
       pathspec => "${s}(/.*)?",
       seltype  => 'public_content_rw_t',
     }
+    ~> selinux::exec_restorecon { "restorecon-for-${s}":
+      path        => $s,
+      recurse     => true,
+      refreshonly => true,
+    }
   }
 
   class { 'samba::server':
