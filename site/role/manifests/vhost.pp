@@ -15,7 +15,7 @@ class role::vhost (
     path          => '/export/pool1',
     guest_only    => false,
     guest_ok      => false,
-    guest_account => 'guest',
+    guest_account => '',
     browsable     => true,
     read_only     => false,
 #    create_mask          => 0644,
