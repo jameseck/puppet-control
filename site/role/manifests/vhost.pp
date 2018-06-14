@@ -52,4 +52,11 @@ class role::vhost (
     valid_users   => 'james',
   }
 
+  $zfs_services = [ 'zfs-import-scan', 'zfs-mount', 'zfs-share', 'zfs-zed',  ]
+
+  service { $zfs_services:
+    ensure  => running,
+    enabled => true,
+  }
+
 }
