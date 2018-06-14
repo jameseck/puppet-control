@@ -104,4 +104,19 @@ class role::vhost (
     notify => Exec['nfs-server restart'],
   }
 
+  exec { 'nfs-server restart':
+    command     => 'systemctl restart nfs-server',
+    refreshonly => true,
+    notify      => Exec['zfs-share restart'],
+  }
+
+  exec { 'zfs-share restart':
+    command     => 'systemctl restart zfs-share',
+    refreshonly => true,
+  }
+
+  exec { 'rpc-statd restart':
+    command     => 'systemctl restart rpc-statd',
+    refreshonly => true,
+  }
 }
