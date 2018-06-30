@@ -50,6 +50,7 @@ class role::openshift (
     'sos',
     'psacct',
     'python-passlib',
+    'java-1.8.0-openjdk-headless',
     ]
 
   package { $packages:
