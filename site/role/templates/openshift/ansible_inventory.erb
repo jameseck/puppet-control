@@ -368,6 +368,7 @@ osm_cockpit_plugins=['cockpit-kubernetes']
 
 # default project node selector
 #osm_default_node_selector='region=primary'
+osm_default_node_selector='region=primary'
 
 # Override the default pod eviction timeout
 #openshift_master_pod_eviction_timeout=5m
@@ -407,6 +408,7 @@ osm_cockpit_plugins=['cockpit-kubernetes']
 # Router will only be created if nodes matching this label are present.
 # Default value: 'region=infra'
 #openshift_hosted_router_selector='region=infra'
+openshift_hosted_router_selector='region=primary'
 #
 # Router replicas (optional)
 # Unless specified, openshift-ansible will calculate the replica count
