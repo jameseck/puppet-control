@@ -49,6 +49,7 @@ class role::openshift (
     'kexec-tools',
     'sos',
     'psacct',
+    'python-passlib',
     ]
 
   package { $packages:
