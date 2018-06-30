@@ -16,5 +16,6 @@ role::openshift::openshift_users:
 nfs::server::exports_hash:
   /mnt:
     path: /mnt
-    clients: 192.168.1.0/24
+    clients:
+    - 192.168.1.0/24
     options: ro,async,no_root_squash
