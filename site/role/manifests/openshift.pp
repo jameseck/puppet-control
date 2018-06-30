@@ -109,7 +109,7 @@ class role::openshift (
     owner    => 'root',
     group    => 'root',
     mode     => '0644',
-    template => template('roles/openshift/ansible_inventory.erb'),
+    template => template('role/openshift/ansible_inventory.erb'),
   }
 
 }
