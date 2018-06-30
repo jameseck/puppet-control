@@ -29,7 +29,7 @@ class role::openshift (
   $hosted_storage_paths.each |$p| {
     nfs::server::export { "nfs export for ${p}":
       path    => $p,
-      clients => ['127.0.0.1', ],
+      clients => [ $facts['fqdn'], ],
       options => 'rw,no_root_squash',
       comment => 'Created by role::openshift',
     }
