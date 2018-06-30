@@ -24,8 +24,8 @@ class role::openshift (
   }
   -> file { [ $openshift_hosted_storage_root_dir, $hosted_storage_paths, ]:
     ensure => directory,
-    owner  => 'root',
-    group  => 'root',
+    owner  => 1000040000,
+    group  => 1000040000,
     mode   => '0755',
   }
 
@@ -125,4 +125,8 @@ class role::openshift (
     command => 'ansible-playbook -i /opt/openshift/inventory/hosts /opt/openshift-ansible/playbooks/deploy_cluster.yml',
     creates => '/opt/openshift/deploycluster_run',
   }
+
+  # TODO: fix permissions issue for logging/metrics pods - user 1000040000 needs access to create dirs on nfs path,
+  # but we can't predict what uid will be assigned...perhaps
+
 }
