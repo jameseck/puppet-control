@@ -115,4 +115,10 @@ class role::openshift (
   # TODO: disable firewalld and set up iptables rules
   # Openshift installer does some of this so we need to tread carefully
 
+  # Run the prerequisites playbook
+  exec { 'Run the Openshift prerequisites ansible playbook':
+    command => 'ansible-playbook -i /opt/openshift/inventory/hosts /opt/openshift-ansible/playbooks/prerequisites.yml && touch /opt/openshift/prerequisites_run',
+    creates => '/opt/openshift/prerequisites_run',
+  }
+
 }
