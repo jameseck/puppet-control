@@ -7,7 +7,7 @@ class role::openshift (
 ) {
 
   include '::profile::epel'
-  include '::docker'
+  #include '::docker'
   include '::nfs::server'
 
   $hosted_storage_paths = [
@@ -111,5 +111,8 @@ class role::openshift (
     mode    => '0644',
     content => template('role/openshift/ansible_inventory.erb'),
   }
+
+  # TODO: disable firewalld and set up iptables rules
+  # Openshift installer does some of this so we need to tread carefully
 
 }
