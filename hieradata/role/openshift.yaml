@@ -13,3 +13,8 @@ role::openshift::openshift_users:
     ENtKgDCmLcUXCw9vkPFTVfyI4/79j3wpFWUXBhll5dij2aV9ebbbQ88qYKhg
     X7XNgGlWc/Q=]
 
+nfs::server::exports_hash:
+  /mnt:
+    path: /mnt
+    clients: 192.168.1.0/24
+    options: ro,async,no_root_squash
