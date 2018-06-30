@@ -17,7 +17,12 @@ class profile::base (
     ensure => installed,
   }
 
-  service { 'puppet':
+  file_line { 'puppet server':
+    path  => $::settings::config,
+    match => '^server =.*$',
+    line  => "server = ${::puppetserver}",
+  }
+  ~> service { 'puppet':
     ensure => running,
     enable => true,
   }

@@ -16,9 +16,12 @@
 # they run. The Puppet Enterprise console needs this to display file contents
 # and differences.
 
+$puppetserver = lookup({'name' => 'puppetserver', 'default_value' => 'puppet'})
+
 # Define filebucket 'main':
+
 filebucket { 'main':
-  server => lookup({'name' => 'puppetserver', 'default_value' => 'puppet'}),
+  server => $puppetserver,
   path   => false,
 }
 
