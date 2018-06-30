@@ -7,7 +7,7 @@ class role::openshift (
 
   include '::profile::epel'
   include '::docker'
-  include '::nfs'
+  include '::nfs::server'
 
   $packages = [
     'git',
