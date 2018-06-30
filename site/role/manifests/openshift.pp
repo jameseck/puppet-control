@@ -16,6 +16,12 @@ class role::openshift (
     "${openshift_hosted_storage_root_dir}/metrics",
   ]
 
+  $hosted_storage_prometheus_paths = [
+    "${openshift_hosted_storage_root_dir}/prometheus",
+    "${openshift_hosted_storage_root_dir}/prometheus-alertmanager",
+    "${openshift_hosted_storage_root_dir}/prometheus-alertbuffer",
+  ]
+
   exec { "mkdir -p ${openshift_hosted_storage_root_dir}":
     creates => $openshift_hosted_storage_root_dir,
   }
@@ -26,11 +32,6 @@ class role::openshift (
     mode   => '0775',
   }
 
-  $hosted_storage_prometheus_paths = [
-    "${openshift_hosted_storage_root_dir}/prometheus",
-    "${openshift_hosted_storage_root_dir}/prometheus-alertmanager",
-    "${openshift_hosted_storage_root_dir}/prometheus-alertbuffer",
-  ]
   -> file { $hosted_storage_prometheus_paths:
     ensure => directory,
     owner  => 1000090000,
