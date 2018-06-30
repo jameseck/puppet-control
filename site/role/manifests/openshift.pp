@@ -105,11 +105,11 @@ class role::openshift (
   $openshift_named_certs_erb = inline_template("<% require 'json' -%><%= @openshift_master_named_certificates.to_json -%>")
 
   file { "${base_path}/inventory/hosts":
-    ensure   => file,
-    owner    => 'root',
-    group    => 'root',
-    mode     => '0644',
-    template => template('role/openshift/ansible_inventory.erb'),
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template('role/openshift/ansible_inventory.erb'),
   }
 
 }
