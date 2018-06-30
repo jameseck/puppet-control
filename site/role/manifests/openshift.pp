@@ -14,12 +14,10 @@ class role::openshift (
     "${openshift_hosted_storage_root_dir}/registry",
     "${openshift_hosted_storage_root_dir}/logging",
     "${openshift_hosted_storage_root_dir}/metrics",
-  ]
-
-  $hosted_storage_prometheus_paths = [
     "${openshift_hosted_storage_root_dir}/prometheus",
     "${openshift_hosted_storage_root_dir}/prometheus-alertmanager",
     "${openshift_hosted_storage_root_dir}/prometheus-alertbuffer",
+    "${openshift_hosted_storage_root_dir}/osev3-etcd",
   ]
 
   exec { "mkdir -p ${openshift_hosted_storage_root_dir}":
@@ -27,19 +25,12 @@ class role::openshift (
   }
   -> file { [ $openshift_hosted_storage_root_dir, $hosted_storage_paths, ]:
     ensure => directory,
-    owner  => 1000040000,
-    group  => 1000040000,
-    mode   => '0775',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0777',
   }
 
-  -> file { $hosted_storage_prometheus_paths:
-    ensure => directory,
-    owner  => 1000090000,
-    group  => 1000090000,
-    mode   => '0775',
-  }
-
-  [ $hosted_storage_paths, $hosted_storage_prometheus_paths, ].flatten.each |$p| {
+  $hosted_storage_paths.each |$p| {
     nfs::server::export { "nfs export for ${p}":
       path    => $p,
       clients => [ $facts['fqdn'], ],
