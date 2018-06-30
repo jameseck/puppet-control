@@ -35,6 +35,9 @@ mod 'theforeman-puppet', '9.0.0'
 mod 'theforeman-tftp', '4.1.0'
 
 
+mod 'jameseck/nfs',
+  :git    => 'https://github.com/jameseck/puppet-nfs',
+  :branch => 'master'
 mod 'jameseck/dns_record',
   :git    => 'https://github.com/jameseck/puppet-dns_record',
   :branch => 'master'
