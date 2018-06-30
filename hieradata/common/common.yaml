@@ -1,4 +1,5 @@
 ---
+puppetserver: theforeman.je.home
 packages_debian:
 - curl
 - netcat

@@ -18,7 +18,7 @@
 
 # Define filebucket 'main':
 filebucket { 'main':
-  server => 'puppet',
+  server => lookup({'name' => 'puppetserver', 'default_value' => 'puppet'}),
   path   => false,
 }
 
