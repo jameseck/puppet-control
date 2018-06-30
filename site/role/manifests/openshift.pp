@@ -112,11 +112,4 @@ class role::openshift (
     content => template('role/openshift/ansible_inventory.erb'),
   }
 
-#  We shouldn't have to do this as the installer should do it, but it isn't.......
-#  $repo_package = "centos-release-openshift-origin${regsubst($release, '\.', '')}"
-#
-#  package { $repo_package:
-#    ensure => installed,
-#  }
-
 }
