@@ -474,8 +474,8 @@ openshift_hosted_manage_registry_console=true
 
 openshift_hosted_registry_storage_kind=nfs
 openshift_hosted_registry_storage_access_modes=['ReadWriteMany']
-openshift_hosted_registry_storage_host=vhost.je.home
-openshift_hosted_registry_storage_nfs_directory=/export/pool1/origin/registry
+openshift_hosted_registry_storage_host=<%= @fqdn %>
+openshift_hosted_registry_storage_nfs_directory=<%= @openshift_hosted_storage_root_dir -%>/registry
 openshift_hosted_registry_storage_volume_name=registry
 openshift_hosted_registry_storage_volume_size=10Gi
 
@@ -572,8 +572,8 @@ openshift_metrics_install_metrics=true
 
 openshift_hosted_metrics_storage_kind=nfs
 openshift_hosted_metrics_storage_access_modes=['ReadWriteOnce']
-openshift_hosted_metrics_storage_host=vhost.je.home
-openshift_hosted_metrics_storage_nfs_directory=/export/pool1/origin/metrics
+openshift_hosted_metrics_storage_host=<%= @fqdn %>
+openshift_hosted_metrics_storage_nfs_directory=<%= @openshift_hosted_storage_root_dir -%>/metrics
 openshift_hosted_metrics_storage_volume_name=metrics
 openshift_hosted_metrics_storage_volume_size=10Gi
 openshift_hosted_metrics_storage_labels={'storage': 'metrics'}
@@ -645,8 +645,8 @@ openshift_logging_install_logging=true
 
 openshift_hosted_logging_storage_kind=nfs
 openshift_hosted_logging_storage_access_modes=['ReadWriteOnce']
-openshift_hosted_logging_storage_host=vhost.je.home
-openshift_hosted_logging_storage_nfs_directory=/export/pool1/origin/logging
+openshift_hosted_logging_storage_host=<%= @fqdn -%>
+openshift_hosted_logging_storage_nfs_directory=<%= @openshift_hosted_storage_root_dir -%>/logging
 openshift_hosted_logging_storage_volume_name=logging
 openshift_hosted_logging_storage_volume_size=10Gi
 openshift_hosted_logging_storage_labels={'storage': 'logging'}

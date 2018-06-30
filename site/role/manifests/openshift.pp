@@ -3,11 +3,28 @@ class role::openshift (
   Hash      $openshift_users = {},
   String[1] $openshift_master_default_subdomain = 'apps.letitbleed.org',
   String[1] $openshift_master_cluster_hostname  = 'openshift.letitbleed.org',
+  String[1] $openshift_hosted_storage_root_dir  = '/export/openshift',
 ) {
 
   include '::profile::epel'
   include '::docker'
   include '::nfs::server'
+
+  $hosted_storage_paths = [
+    "${openshift_hosted_storage_root_dir}/registry",
+    "${openshift_hosted_storage_root_dir}/logging",
+    "${openshift_hosted_storage_root_dir}/metrics",
+  ]
+
+  exec { "mkdir -p ${openshift_hosted_storage_root_dir}":
+    creates => $openshift_hosted_storage_root_dir,
+  }
+  -> file { [ $openshift_hosted_storage_root_dir, $hosted_storage_paths, ]:
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+  }
 
   $packages = [
     'git',
