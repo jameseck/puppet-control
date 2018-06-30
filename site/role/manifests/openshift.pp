@@ -26,7 +26,7 @@ class role::openshift (
     ensure => directory,
     owner  => 1000040000,
     group  => 1000040000,
-    mode   => '0755',
+    mode   => '0775',
   }
 
   $hosted_storage_paths.each |$p| {
