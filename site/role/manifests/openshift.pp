@@ -31,7 +31,7 @@ class role::openshift (
     "${openshift_hosted_storage_root_dir}/prometheus-alertmanager",
     "${openshift_hosted_storage_root_dir}/prometheus-alertbuffer",
   ]
-  -> file { [ $hosted_storage_prometheus_paths, ]:
+  -> file { $hosted_storage_prometheus_paths:
     ensure => directory,
     owner  => 1000090000,
     group  => 1000090000,
