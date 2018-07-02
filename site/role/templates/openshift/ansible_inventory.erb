@@ -1221,7 +1221,7 @@ openshift_hosted_infra_selector='region=primary'
 
 openshift_hosted_etcd_storage_kind=nfs
 openshift_hosted_etcd_storage_nfs_options="<%= @fqdn -%>*(rw,root_squash,sync,no_wdelay)"
-openshift_hosted_etcd_storage_nfs_directory=<%= @openshift_hosted_storage_root_dir -%>/osev3-etcd
+openshift_hosted_etcd_storage_nfs_directory=<%= @openshift_hosted_storage_root_dir %>
 openshift_hosted_etcd_storage_volume_name=etcd-vol
 openshift_hosted_etcd_storage_access_modes=["ReadWriteOnce"]
 openshift_hosted_etcd_storage_volume_size=1G

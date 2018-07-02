@@ -17,7 +17,7 @@ class role::openshift (
     "${openshift_hosted_storage_root_dir}/prometheus",
     "${openshift_hosted_storage_root_dir}/prometheus-alertmanager",
     "${openshift_hosted_storage_root_dir}/prometheus-alertbuffer",
-    "${openshift_hosted_storage_root_dir}/osev3-etcd",
+    "${openshift_hosted_storage_root_dir}/etcd-vol",
   ]
 
   exec { "mkdir -p ${openshift_hosted_storage_root_dir}":
