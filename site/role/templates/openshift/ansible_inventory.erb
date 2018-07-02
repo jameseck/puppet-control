@@ -648,13 +648,13 @@ openshift_metrics_image_version=v3.9
 # Currently logging deployment is disabled by default, enable it by setting this
 openshift_logging_install_logging=true
 
-openshift_hosted_logging_storage_kind=nfs
-openshift_hosted_logging_storage_access_modes=['ReadWriteOnce']
-openshift_hosted_logging_storage_host=<%= @fqdn %>
-openshift_hosted_logging_storage_nfs_directory=<%= @openshift_hosted_storage_root_dir %>
-openshift_hosted_logging_storage_volume_name=logging
-openshift_hosted_logging_storage_volume_size=10Gi
-openshift_hosted_logging_storage_labels={'storage': 'logging'}
+openshift_logging_storage_kind=nfs
+openshift_logging_storage_access_modes=['ReadWriteOnce']
+openshift_logging_storage_host=<%= @fqdn %>
+openshift_logging_storage_nfs_directory=<%= @openshift_hosted_storage_root_dir %>
+openshift_logging_storage_volume_name=logging
+openshift_logging_storage_volume_size=10Gi
+openshift_logging_storage_labels={'storage': 'logging'}
 
 #
 # Logging storage config
