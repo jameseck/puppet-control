@@ -36,7 +36,8 @@ class role::openshift (
       path    => $p,
       clients => [ '*', ], #$facts['fqdn'], ],
       options => 'rw,no_root_squash',
-      comment => 'Created by role::openshift',
+      comment => '',
+  #    comment => 'Created by role::openshift',
     }
   }
 
