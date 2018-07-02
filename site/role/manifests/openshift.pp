@@ -13,6 +13,7 @@ class role::openshift (
   $hosted_storage_paths = [
     "${openshift_hosted_storage_root_dir}/registry",
     "${openshift_hosted_storage_root_dir}/logging",
+    "${openshift_hosted_storage_root_dir}/logging-es-ops"
     "${openshift_hosted_storage_root_dir}/metrics",
     "${openshift_hosted_storage_root_dir}/prometheus",
     "${openshift_hosted_storage_root_dir}/prometheus-alertmanager",
@@ -129,5 +130,7 @@ class role::openshift (
 
   # TODO: fix permissions issue for logging/metrics pods - user 1000040000 needs access to create dirs on nfs path,
   # but we can't predict what uid will be assigned...perhaps
+
+  # We could add a custom fact to determine if the openshift-ansible playbook has been run successfully.  If so, fix the perms on the local nfs exports for the openshift infra - hacky...
 
 }
