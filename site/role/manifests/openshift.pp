@@ -123,16 +123,16 @@ class role::openshift (
   # Openshift installer does some of this so we need to tread carefully
 
   exec { 'Run the Openshift prerequisites ansible playbook':
-    command => 'ansible-playbook -i /opt/openshift/inventory/hosts /opt/openshift-ansible/playbooks/prerequisites.yml && touch /opt/openshift/prerequisites_run',
+    command => 'ansible-playbook -i /opt/openshift/inventory/hosts /opt/openshift/ansible/playbooks/prerequisites.yml && touch /opt/openshift/prerequisites_run',
     creates => '/opt/openshift/prerequisites_run',
   }
 #  -> exec { 'Run the Openshift deploy-cluster playbook':
-#    command => 'ansible-playbook -i /opt/openshift/inventory/hosts /opt/openshift-ansible/playbooks/deploy_cluster.yml',
+#    command => 'ansible-playbook -i /opt/openshift/inventory/hosts /opt/openshift/ansible/playbooks/deploy_cluster.yml',
 #    creates => '/opt/openshift/deploycluster_run',
 #  }
 
-# ansible-playbook -i /opt/openshift/inventory/hosts /opt/openshift-ansible/playbooks/prerequisites.yml
-# ansible-playbook -i /opt/openshift/inventory/hosts /opt/openshift-ansible/playbooks/deploy_cluster.yml
+# ansible-playbook -i /opt/openshift/inventory/hosts /opt/openshift/ansible/playbooks/prerequisites.yml
+# ansible-playbook -i /opt/openshift/inventory/hosts /opt/openshift/ansible/playbooks/deploy_cluster.yml
 
 
   # TODO: fix permissions issue for logging/metrics pods - user 1000040000 needs access to create dirs on nfs path,
