@@ -31,15 +31,17 @@ class role::openshift (
     mode   => '0777',
   }
 
-  $hosted_storage_paths.each |$p| {
-    nfs::server::export { "nfs export for ${p}":
-      path    => $p,
-      clients => [ '*', ], #$facts['fqdn'], ],
-      options => 'rw,root_squash',
-      comment => '',
-  #    comment => 'Created by role::openshift',
-    }
-  }
+# We don't need this because the openshift ansible playbook handles these
+#
+#  $hosted_storage_paths.each |$p| {
+#    nfs::server::export { "nfs export for ${p}":
+#      path    => $p,
+#      clients => [ '*', ], #$facts['fqdn'], ],
+#      options => 'rw,root_squash',
+#      comment => '',
+#  #    comment => 'Created by role::openshift',
+#    }
+#  }
 
   $packages = [
     'git',
