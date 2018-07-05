@@ -359,6 +359,7 @@ osm_cockpit_plugins=['cockpit-kubernetes']
 # If an external load balancer is used public hostname should resolve to
 # external load balancer address
 #openshift_master_cluster_public_hostname=openshift-ansible.public.example.com
+openshift_master_cluster_public_hostname=<%= @openshift_master_cluster_hostname %>
 
 # Configure controller arguments
 #osm_controller_args={'resource-quota-sync-period': ['10s']}
