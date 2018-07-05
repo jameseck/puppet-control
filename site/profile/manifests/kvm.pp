@@ -1,10 +1,6 @@
 class profile::kvm (
 ) {
 
-  package { 'dejavu-lgc-sans-fonts':
-    ensure => installed,
-  }
-
   kernel_parameter { [ 'rhqb', 'quiet', ]:
     ensure => absent,
   }

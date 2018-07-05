@@ -13,6 +13,9 @@ class role::vhost (
     type => 'targeted',
   }
 
+  package { 'dejavu-lgc-sans-fonts':
+    ensure => installed,
+  }
 
   $samba_shares.each |$s| {
     selinux::fcontext { "set-export-fcontext-${s}":
