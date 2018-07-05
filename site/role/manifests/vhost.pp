@@ -17,6 +17,11 @@ class role::vhost (
     ensure => installed,
   }
 
+  service { 'nfs-server':
+    enable => true,
+    ensure => running,
+  }
+
   $samba_shares.each |$s| {
     selinux::fcontext { "set-export-fcontext-${s}":
       ensure   => present,
