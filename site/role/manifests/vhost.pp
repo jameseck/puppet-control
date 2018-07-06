@@ -10,8 +10,9 @@ class role::vhost (
 
   include '::docker'
 
+  # TODO: somehow deal with .kube config
   docker::run { 'nfs-provisioner':
-    image            => 'base',
+    image            => 'quay.io/kubernetes_incubator/nfs-provisioner:v1.0.9',
     detach           => true,
     service_prefix   => 'docker-',
     command          => "-provisioner=${facts['fqdn']}/nfs -kubeconfig=/.kube/config -enable-xfs-quota=false -run-server=false -use-ganesha=false",
