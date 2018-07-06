@@ -20,7 +20,7 @@ class role::vhost (
     image            => 'quay.io/kubernetes_incubator/nfs-provisioner:v1.0.9',
     detach           => false,
     service_prefix   => 'docker-',
-    command          => "-provisioner=${facts['fqdn']}/nfs -kubeconfig=/.kube/config -enable-xfs-quota=false -run-server=false -use-ganesha=false",
+    command          => "-provisioner=${facts['fqdn']}/nfs -kubeconfig=/.kube/config -enable-xfs-quota=false -run-server=false -use-ganesha=false -server-hostname=vhost.je.home",
     volumes          => ['/root/.kube:/.kube:Z', '/export/pool1/openshift:/export:Z'],
     restart_service  => true,
     privileged       => true,
