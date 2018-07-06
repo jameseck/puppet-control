@@ -10,6 +10,17 @@ class role::vhost (
 
   include '::docker'
 
+  docker::run { 'nfs-provisioner':
+    image            => 'base',
+    detach           => true,
+    service_prefix   => 'docker-',
+    command          => "-provisioner=${facts['fqdn']}/nfs -kubeconfig=/.kube/config -enable-xfs-quota=false -run-server=false -use-ganesha=false",
+    volumes          => ['/root/.kube:/.kube:Z', '/export/pool1/openshift:/export:Z'],
+    restart_service  => true,
+    privileged       => true,
+    extra_parameters => [ '--restart=always' ],
+  }
+
   class { 'selinux':
     mode => 'enforcing',
     type => 'targeted',
