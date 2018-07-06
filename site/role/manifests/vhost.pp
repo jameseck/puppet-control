@@ -18,7 +18,7 @@ class role::vhost (
   # TODO: somehow deal with .kube config
   docker::run { 'nfs-provisioner':
     image            => 'quay.io/kubernetes_incubator/nfs-provisioner:v1.0.9',
-    detach           => true,
+    detach           => false,
     service_prefix   => 'docker-',
     command          => "-provisioner=${facts['fqdn']}/nfs -kubeconfig=/.kube/config -enable-xfs-quota=false -run-server=false -use-ganesha=false",
     volumes          => ['/root/.kube:/.kube:Z', '/export/pool1/openshift:/export:Z'],
