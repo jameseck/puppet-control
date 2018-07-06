@@ -8,6 +8,8 @@ class role::vhost (
   Array     $samba_shares = [],
 ) {
 
+  include '::docker'
+
   class { 'selinux':
     mode => 'enforcing',
     type => 'targeted',
