@@ -10,6 +10,11 @@ class role::vhost (
 
   include '::docker'
 
+  selboolean { 'samba_export_all_rw':
+    persistent => true,
+    value      => 'on',
+  }
+
   # TODO: somehow deal with .kube config
   docker::run { 'nfs-provisioner':
     image            => 'quay.io/kubernetes_incubator/nfs-provisioner:v1.0.9',
