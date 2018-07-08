@@ -68,7 +68,7 @@ class role::vhost (
   }
 
   [ 'pool1', 'pool2', ].each |$p| {
-    samba::server::share { 'pool1':
+    samba::server::share { $p:
       comment       => $p,
       path          => "/export/${p}",
       guest_only    => false,
