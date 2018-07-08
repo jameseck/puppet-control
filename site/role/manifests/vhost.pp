@@ -51,6 +51,7 @@ class role::vhost (
       path        => $s,
       recurse     => true,
       refreshonly => true,
+      timeout     => 0,
     }
   }
 
