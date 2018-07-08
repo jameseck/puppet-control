@@ -9,6 +9,24 @@ class role::vhost (
 ) {
 
   include '::docker'
+  include '::nfs::server'
+
+  $exports = [
+    'pool1',
+    'pool1/films',
+    'pool1/music',
+    'pool1/tv',
+    'pool1/pv',
+    'pool2',
+  ]
+
+  $exports.each |$ex| {
+    nfs::server::export {"export ${ex}":
+      path    => $ex,
+      clients => '*',
+      options => 'rw,sync,wdelay,hide,crossmnt,no_subtree_check,mountpoint,sec=sys,secure,no_root_squash,no_all_squash',
+    }
+  }
 
   selboolean { 'samba_export_all_rw':
     persistent => true,
