@@ -8,11 +8,38 @@ class role::vhost (
   Array     $samba_shares = [],
 ) {
 
+  include '::docker'
+
+  selboolean { 'samba_export_all_rw':
+    persistent => true,
+    value      => 'on',
+  }
+
+  # TODO: somehow deal with .kube config
+  docker::run { 'nfs-provisioner':
+    image            => 'quay.io/kubernetes_incubator/nfs-provisioner:v1.0.9',
+    detach           => false,
+    service_prefix   => 'docker-',
+    command          => "-provisioner=${facts['fqdn']}/nfs -kubeconfig=/.kube/config -enable-xfs-quota=false -run-server=false -use-ganesha=false -server-hostname=vhost.je.home",
+    volumes          => ['/root/.kube:/.kube:Z', '/export/pool1/openshift:/export:Z'],
+    restart_service  => true,
+    privileged       => true,
+    extra_parameters => [ '--restart=always' ],
+  }
+
   class { 'selinux':
     mode => 'enforcing',
     type => 'targeted',
   }
 
+  package { 'dejavu-lgc-sans-fonts':
+    ensure => installed,
+  }
+
+  service { 'nfs-server':
+    enable => true,
+    ensure => running,
+  }
 
   $samba_shares.each |$s| {
     selinux::fcontext { "set-export-fcontext-${s}":

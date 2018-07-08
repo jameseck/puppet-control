@@ -359,6 +359,7 @@ osm_cockpit_plugins=['cockpit-kubernetes']
 # If an external load balancer is used public hostname should resolve to
 # external load balancer address
 #openshift_master_cluster_public_hostname=openshift-ansible.public.example.com
+openshift_master_cluster_public_hostname=<%= @openshift_master_cluster_hostname %>
 
 # Configure controller arguments
 #osm_controller_args={'resource-quota-sync-period': ['10s']}
@@ -648,13 +649,21 @@ openshift_metrics_image_version=v3.9
 # Currently logging deployment is disabled by default, enable it by setting this
 openshift_logging_install_logging=true
 
-openshift_hosted_logging_storage_kind=nfs
-openshift_hosted_logging_storage_access_modes=['ReadWriteOnce']
-openshift_hosted_logging_storage_host=<%= @fqdn %>
-openshift_hosted_logging_storage_nfs_directory=<%= @openshift_hosted_storage_root_dir %>
-openshift_hosted_logging_storage_volume_name=logging
-openshift_hosted_logging_storage_volume_size=10Gi
-openshift_hosted_logging_storage_labels={'storage': 'logging'}
+openshift_logging_storage_kind=nfs
+openshift_logging_storage_access_modes=['ReadWriteOnce']
+openshift_logging_storage_host=<%= @fqdn %>
+openshift_logging_storage_nfs_directory=<%= @openshift_hosted_storage_root_dir %>
+openshift_logging_storage_volume_name=logging
+openshift_logging_storage_volume_size=10Gi
+openshift_logging_storage_labels={'storage': 'logging'}
+
+openshift_loggingops_storage_kind=nfs
+openshift_loggingops_storage_access_modes=['ReadWriteOnce']
+openshift_loggingops_storage_host=<%= @fqdn %>
+openshift_loggingops_storage_nfs_directory=<%= @openshift_hosted_storage_root_dir %>
+openshift_loggingops_storage_volume_name=loggingops
+openshift_loggingops_storage_volume_size=10Gi
+openshift_loggingops_storage_labels={'storage': 'loggingops'}
 
 #
 # Logging storage config
@@ -1174,6 +1183,7 @@ openshift_master_audit_config={"enabled": true}
 # You may may also change this value if you want to change the default
 # path used for local NFS exports.
 #openshift_management_storage_nfs_base_dir: /exports
+openshift_management_storage_nfs_base_dir=/export/openshift
 
 # LOCAL NFS NOTE:
 #
@@ -1221,9 +1231,12 @@ openshift_hosted_infra_selector='region=primary'
 
 openshift_hosted_etcd_storage_kind=nfs
 openshift_hosted_etcd_storage_nfs_options="<%= @fqdn -%>*(rw,root_squash,sync,no_wdelay)"
-openshift_hosted_etcd_storage_nfs_directory=<%= @openshift_hosted_storage_root_dir -%>/osev3-etcd
+openshift_hosted_etcd_storage_nfs_directory=<%= @openshift_hosted_storage_root_dir %>
 openshift_hosted_etcd_storage_volume_name=etcd-vol
 openshift_hosted_etcd_storage_access_modes=["ReadWriteOnce"]
 openshift_hosted_etcd_storage_volume_size=1G
 openshift_hosted_etcd_storage_labels={'storage': 'etcd'}
+
+openshift_logging_elasticsearch_proxy_image_prefix=docker.io/openshift/
+openshift_logging_elasticsearch_proxy_image_version=v1.0.0
 

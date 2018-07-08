@@ -13,11 +13,12 @@ class role::openshift (
   $hosted_storage_paths = [
     "${openshift_hosted_storage_root_dir}/registry",
     "${openshift_hosted_storage_root_dir}/logging",
+    "${openshift_hosted_storage_root_dir}/loggingops",
     "${openshift_hosted_storage_root_dir}/metrics",
     "${openshift_hosted_storage_root_dir}/prometheus",
     "${openshift_hosted_storage_root_dir}/prometheus-alertmanager",
     "${openshift_hosted_storage_root_dir}/prometheus-alertbuffer",
-    "${openshift_hosted_storage_root_dir}/osev3-etcd",
+    "${openshift_hosted_storage_root_dir}/etcd-vol",
   ]
 
   exec { "mkdir -p ${openshift_hosted_storage_root_dir}":
@@ -30,14 +31,17 @@ class role::openshift (
     mode   => '0777',
   }
 
-  $hosted_storage_paths.each |$p| {
-    nfs::server::export { "nfs export for ${p}":
-      path    => $p,
-      clients => [ $facts['fqdn'], ],
-      options => 'rw,no_root_squash',
-      comment => 'Created by role::openshift',
-    }
-  }
+# We don't need this because the openshift ansible playbook handles these
+#
+#  $hosted_storage_paths.each |$p| {
+#    nfs::server::export { "nfs export for ${p}":
+#      path    => $p,
+#      clients => [ '*', ], #$facts['fqdn'], ],
+#      options => 'rw,root_squash',
+#      comment => '',
+#  #    comment => 'Created by role::openshift',
+#    }
+#  }
 
   $packages = [
     'git',
@@ -119,15 +123,21 @@ class role::openshift (
   # Openshift installer does some of this so we need to tread carefully
 
   exec { 'Run the Openshift prerequisites ansible playbook':
-    command => 'ansible-playbook -i /opt/openshift/inventory/hosts /opt/openshift-ansible/playbooks/prerequisites.yml && touch /opt/openshift/prerequisites_run',
+    command => 'ansible-playbook -i /opt/openshift/inventory/hosts /opt/openshift/ansible/playbooks/prerequisites.yml && touch /opt/openshift/prerequisites_run',
     creates => '/opt/openshift/prerequisites_run',
   }
-  -> exec { 'Run the Openshift deploy-cluster playbook':
-    command => 'ansible-playbook -i /opt/openshift/inventory/hosts /opt/openshift-ansible/playbooks/deploy_cluster.yml',
-    creates => '/opt/openshift/deploycluster_run',
-  }
+#  -> exec { 'Run the Openshift deploy-cluster playbook':
+#    command => 'ansible-playbook -i /opt/openshift/inventory/hosts /opt/openshift/ansible/playbooks/deploy_cluster.yml',
+#    creates => '/opt/openshift/deploycluster_run',
+#  }
+
+# ansible-playbook -i /opt/openshift/inventory/hosts /opt/openshift/ansible/playbooks/prerequisites.yml
+# ansible-playbook -i /opt/openshift/inventory/hosts /opt/openshift/ansible/playbooks/deploy_cluster.yml
+
 
   # TODO: fix permissions issue for logging/metrics pods - user 1000040000 needs access to create dirs on nfs path,
   # but we can't predict what uid will be assigned...perhaps
+
+  # We could add a custom fact to determine if the openshift-ansible playbook has been run successfully.  If so, fix the perms on the local nfs exports for the openshift infra - hacky...
 
 }
