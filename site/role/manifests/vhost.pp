@@ -23,7 +23,7 @@ class role::vhost (
   $exports.each |$ex| {
     nfs::server::export {"export ${ex}":
       path    => "/export/${ex}",
-      clients => '*',
+      clients => ['*', ],
       options => 'rw,sync,wdelay,hide,crossmnt,no_subtree_check,mountpoint,sec=sys,secure,no_root_squash,no_all_squash',
     }
   }
