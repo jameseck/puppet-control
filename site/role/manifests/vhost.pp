@@ -94,7 +94,7 @@ class role::vhost (
     }
   }
 
-  $zfs_services = [ 'zfs-import-scan', 'zfs-mount', 'zfs-share', 'zfs-zed',  ]
+  $zfs_services = [ 'zfs-mount', 'zfs-share', 'zfs-zed', ] #'zfs-import-scan', 
 
   service { $zfs_services:
     ensure => running,
