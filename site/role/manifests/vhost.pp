@@ -37,8 +37,8 @@ class role::vhost (
   }
 
   service { 'nfs-server':
-    enable => true,
     ensure => running,
+    enable => true,
   }
 
   $samba_shares.each |$s| {
@@ -67,16 +67,18 @@ class role::vhost (
     }
   }
 
-  samba::server::share { 'pool1':
-    comment       => 'pool1',
-    path          => '/export/pool1',
-    guest_only    => false,
-    guest_ok      => false,
-    guest_account => '',
-    browsable     => true,
-    read_only     => false,
-    force_group   => 'root',
-    valid_users   => 'james',
+  [ 'pool1', 'pool2', ].each |$p| {
+    samba::server::share { 'pool1':
+      comment       => $p,
+      path          => "/export/${p}",
+      guest_only    => false,
+      guest_ok      => false,
+      guest_account => '',
+      browsable     => true,
+      read_only     => false,
+      force_group   => 'root',
+      valid_users   => 'james',
+    }
   }
 
   $zfs_services = [ 'zfs-import-scan', 'zfs-mount', 'zfs-share', 'zfs-zed',  ]
