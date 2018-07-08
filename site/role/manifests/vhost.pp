@@ -104,48 +104,48 @@ class role::vhost (
 
   # TODO; manage firewalld services samba nfs mountd rpc-bind
 
-  ['tcp', 'udp'].each |$p| {
-    etcservices::service { "rpc.statd/${p}":
-      port    => 662,
-      comment => 'nfs rpc.statd',
-    }
+#  ['tcp', 'udp'].each |$p| {
+#    etcservices::service { "rpc.statd/${p}":
+#      port    => 662,
+#      comment => 'nfs rpc.statd',
+#    }
 
-    etcservices::service { "rpc.mountd/${p}":
-      port    => 892,
-      comment => 'nfs rpc.mountd',
-    }
+#    etcservices::service { "rpc.mountd/${p}":
+#      port    => 892,
+#      comment => 'nfs rpc.mountd',
+#    }
 
-    etcservices::service { "rpc.lockd/${p}":
-      port    => 32768,
-      comment => 'nfs rpc.lockd',
-    }
+#    etcservices::service { "rpc.lockd/${p}":
+#      port    => 32768,
+#      comment => 'nfs rpc.lockd',
+#    }
 
-    file_line { "lockd ${p} port":
-      path  => '/etc/modprobe.d/lockd.conf',
-      match => "^(#)?options lockd nlm_${p}port.*$",
-      line  => "options lockd nlm_${p}port=32768",
-    }
+#    file_line { "lockd ${p} port":
+#      path  => '/etc/modprobe.d/lockd.conf',
+#      match => "^(#)?options lockd nlm_${p}port.*$",
+#      line  => "options lockd nlm_${p}port=32768",
+#    }
 
-    sysctl { "fs.nfs.nlm_${p}port":
-      ensure => present,
-      value  => '32768',
-      notify => Exec['nfs-server restart'],
-    }
-  }
+#    sysctl { "fs.nfs.nlm_${p}port":
+#      ensure => present,
+#      value  => '32768',
+#      notify => Exec['nfs-server restart'],
+#    }
+#  }
 
-  file_line { 'nfs statd port':
-    path   => '/etc/sysconfig/nfs',
-    match  => '^STATD_PORT=.*$',
-    line   => 'STATD_PORT=662',
-    notify => Exec['rpc-statd restart'],
-  }
+#  file_line { 'nfs statd port':
+#    path   => '/etc/sysconfig/nfs',
+#    match  => '^STATD_PORT=.*$',
+#    line   => 'STATD_PORT=662',
+#    notify => Exec['rpc-statd restart'],
+#  }
 
-  file_line { 'nfs mountd port':
-    path   => '/etc/sysconfig/nfs',
-    match  => '^MOUNTD_PORT=.*$',
-    line   => 'MOUNTD_PORT=892',
-    notify => Exec['nfs-server restart'],
-  }
+#  file_line { 'nfs mountd port':
+#    path   => '/etc/sysconfig/nfs',
+#    match  => '^MOUNTD_PORT=.*$',
+#    line   => 'MOUNTD_PORT=892',
+#    notify => Exec['nfs-server restart'],
+#  }
 
   exec { 'nfs-server restart':
     command     => 'systemctl restart nfs-server',
