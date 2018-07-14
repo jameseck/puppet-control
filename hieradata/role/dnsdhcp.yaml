@@ -56,7 +56,7 @@ role::dnsdhcp::hosts:
     mac: 1c:1b:0d:eb:d0:02
   wlaptop.je.home:
     ip: 192.168.1.49
-    mac: 90:61:ae:5e:e9:2b
+    mac: b4:6b:fc:f5:11:3f
   laptop.je.home:
     ip: 192.168.1.50
     mac: 54:e1:ad:96:4c:8c
