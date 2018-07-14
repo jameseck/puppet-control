@@ -7,6 +7,7 @@ role::vhost::samba_shares:
 - /export/pool1/origin
 - /export/pool1/pv
 - /export/pool1/tv
+- /export/pool2
 role::vhost::samba_users:
 - name: james
   password: >

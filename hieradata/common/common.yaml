@@ -2,9 +2,11 @@
 puppetserver: theforeman.je.home
 packages_debian:
 - curl
+- hdparm
 - netcat
 - screen
 - strace
+- sysstat
 - tcpdump
 - telnet
 - vim
@@ -13,9 +15,11 @@ packages_debian:
 packages_redhat:
 - curl
 - epel-release
+- hdparm
 - nmap-ncat
 - screen
 - strace
+- sysstat
 - tcpdump
 - telnet
 - vim-enhanced
