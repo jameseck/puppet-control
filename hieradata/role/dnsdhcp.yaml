@@ -70,7 +70,7 @@ role::dnsdhcp::hosts:
     ip: 192.168.1.222
     mac: b8:27:eb:35:2f:64
   vhost-kvm.je.home:
-    mac: bc:5f:f4:fe:e7:fc
+    mac: bc:5f:f4:fe:84:54
     ip: 192.168.1.230
   fedoradesk.je.home:
     mac: 08:00:27:c0:42:2a
@@ -120,7 +120,7 @@ foreman_proxy::dhcp_range: '192.168.1.150 192.168.1.159'
 foreman_proxy::dhcp_network: 192.168.1.0
 foreman_proxy::dhcp_netmask: 255.255.255.0
 foreman_proxy::dhcp_failover: 'dhcp-failover'
-foreman_proxy::dhcp_nameservers: 192.168.1.2 # change to .9
+foreman_proxy::dhcp_nameservers: 192.168.1.9
 foreman_proxy::dhcp_pxeserver: 192.168.1.2 # change to .11 (theforeman) or dnsdhcp vip
 foreman_proxy::dhcp_config: /etc/dhcp/dhcpd.conf
 foreman_proxy::dhcp_leases: /var/lib/dhcp/dhcpd.leases
