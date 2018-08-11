@@ -17,11 +17,34 @@ class profile::base (
     ensure => installed,
   }
 
-  file_line { 'puppet server':
-    path  => $::settings::config,
-    match => '^server =.*$',
-    line  => "server = ${::puppetserver}",
+  if versioncmp($::puppetversion, '5.0.0') >= 0 {
+    $puppet_conf_file = '/etc/puppetlabs/puppet/puppet.conf'
+  } else {
+    $puppet_conf_file = '/etc/puppet/puppet.conf'b
   }
+
+
+  [ 'agent', 'master'].each |$section| {
+    ini_setting { "remove server from ${section}":
+      ensure  => absent,
+      path    => $puppet_conf_file,
+      section => $section,
+      setting => 'server',
+    }
+  }
+  -> ini_setting { 'server':
+    ensure  => present,
+    path    => $puppet_conf_file,
+    section => 'main',
+    setting => 'server',
+    value   => $::puppetserver,
+  }
+
+#  file_line { 'puppet server':
+#    path  => $puppet_conf_file,
+#    match => '^\s*server =.*$',
+#    line  => "server = ${::puppetserver}",
+#  }
   ~> service { 'puppet':
     ensure => running,
     enable => true,
