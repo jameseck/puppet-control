@@ -42,11 +42,6 @@ class profile::base (
     notify  => Service['puppet'],
   }
 
-#  file_line { 'puppet server':
-#    path  => $puppet_conf_file,
-#    match => '^\s*server =.*$',
-#    line  => "server = ${::puppetserver}",
-#  }
   service { 'puppet':
     ensure => running,
     enable => true,
