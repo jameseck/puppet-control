@@ -30,14 +30,16 @@ class profile::base (
       path    => $puppet_conf_file,
       section => $section,
       setting => 'server',
+      notify  => Service['puppet'],
     }
   }
-  -> ini_setting { 'server':
+  ini_setting { 'server':
     ensure  => present,
     path    => $puppet_conf_file,
     section => 'main',
     setting => 'server',
     value   => $::puppetserver,
+    notify  => Service['puppet'],
   }
 
 #  file_line { 'puppet server':
@@ -45,7 +47,7 @@ class profile::base (
 #    match => '^\s*server =.*$',
 #    line  => "server = ${::puppetserver}",
 #  }
-  ~> service { 'puppet':
+  service { 'puppet':
     ensure => running,
     enable => true,
   }
