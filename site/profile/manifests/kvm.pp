@@ -5,17 +5,21 @@ class profile::kvm (
     ensure => absent,
   }
 
-  kernel_parameter { 'console':
-    ensure => present,
-    value  => 'ttyS0',
+#  kernel_parameter { 'console':
+#    ensure => present,
+#    value  => 'ttyS0',
+#  }
+
+  grub_config { 'GRUB_CMDLINE_LINUX_DEFAULT':
+    value => 'console=tty0 console=ttyS0,115200n8',
   }
 
   grub_config { 'GRUB_TERMINAL':
-    value => 'console serial'
+    value => 'console serial',
   }
 
   grub_config { 'GRUB_TERMINAL_OUTPUT':
-    value => 'console serial'
+    value => 'console serial',
   }
 
   file_line { 'grub serial command':
