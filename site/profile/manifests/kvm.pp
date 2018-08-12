@@ -19,7 +19,7 @@ class profile::kvm (
   -> file_line { 'GRUB_TERMINAL_OUTPUT':
     path  => '/etc/default/grub',
     match => '^GRUB_TERMINAL_OUTPUT=',
-    line  => 'console serial',
+    line  => 'GRUB_TERMINAL_OUTPUT="console serial"',
   }
 
   -> file_line { 'GRUB_CMDLINE_LINUX_DEFAULT':
