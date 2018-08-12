@@ -11,7 +11,11 @@ class profile::kvm (
   }
 
   grub_config { 'GRUB_TERMINAL':
-    value => 'serial'
+    value => 'console serial'
+  }
+
+  grub_config { 'GRUB_TERMINAL_OUTPUT':
+    value => 'console serial'
   }
 
   file_line { 'grub serial command':
