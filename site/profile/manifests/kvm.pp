@@ -1,9 +1,10 @@
 class profile::kvm (
 ) {
 
-  kernel_parameter { [ 'rhqb', 'quiet', ]:
-    ensure => absent,
-  }
+# broken due to augeas error
+#  kernel_parameter { [ 'rhqb', 'quiet', ]:
+#    ensure => absent,
+#  }
 
 #  kernel_parameter { 'console':
 #    ensure => present,
