@@ -10,16 +10,19 @@ class profile::kvm (
 #    value  => 'ttyS0',
 #  }
 
-  grub_config { 'GRUB_CMDLINE_LINUX_DEFAULT':
-    value => 'console=tty0 console=ttyS0,115200n8',
-  }
-
   grub_config { 'GRUB_TERMINAL':
     value => 'console serial',
   }
 
   grub_config { 'GRUB_TERMINAL_OUTPUT':
     value => 'console serial',
+  }
+
+  file_line { 'GRUB_CMDLINE_LINUX_DEFAULT':
+    path   => '/etc/default/grub',
+    match  => '^GRUB_CMDLINE_LINUX_DEFAULT=',
+    line   => 'GRUB_CMDLINE_LINUX_DEFAULT="console=tty0 console=ttyS0,115200n8"',
+    notify => Exec['grub2-mkconfig'],
   }
 
   file_line { 'grub serial command':
