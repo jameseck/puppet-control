@@ -12,5 +12,9 @@ class profile::stunnel (
     mode   => '0644',
     source => 'puppet:///profiles/stunnel/stunnel@.service',
   }
+  ~> exec { 'reload systemd for stunnel':
+    refreshonly => true,
+    command     => 'systemctl daemon-reload',
+  }
 
 }
