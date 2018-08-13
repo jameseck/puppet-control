@@ -160,7 +160,7 @@ class role::dnsdhcp (
     content => "/^(.*)@(.*).je.home\$/     \${1}.\${2}@jehome.co.uk",
   }
 
-  class { 'profiles::stunnel': }
+  class { 'profile::stunnel': }
   -> file { '/etc/stunnel/blueyonder.conf':
     ensure => file,
     owner  => 'root',
