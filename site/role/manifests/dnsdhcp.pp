@@ -13,6 +13,7 @@ class role::dnsdhcp (
   include '::keepalived'
   include '::foreman_proxy'
   include '::jefirewall'
+  include '::postfix'
 
 #deb http://deb.theforeman.org/ stretch 1.17
 
