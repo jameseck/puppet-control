@@ -167,7 +167,7 @@ class role::dnsdhcp (
     owner  => 'root',
     group  => 'root',
     mode   => '0600',
-    source => 'puppet:///site/roles/dnsdhcp/stunnel_blueyonder.conf',
+    source => 'puppet:///modules/role/dnsdhcp/stunnel_blueyonder.conf',
   }
   ~> service { 'stunnel@blueyonder.service':
     ensure => running,
