@@ -3,6 +3,7 @@ forge 'https://forge.puppet.com'
 mod 'ajjahn-samba', '0.5.0'
 mod 'arioch/keepalived',  '1.2.5'
 mod 'camptocamp-openssl', '1.10.0'
+mod "camptocamp/postfix"
 mod 'camptocamp/systemd', '1.1.1'
 mod 'gentoo-portage', '2.3.0'
 mod 'herculesteam-augeasproviders_core', '2.1.4'
