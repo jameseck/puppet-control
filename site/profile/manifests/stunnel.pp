@@ -10,7 +10,7 @@ class profile::stunnel (
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
-    source => 'puppet:///profiles/stunnel/stunnel@.service',
+    source => 'puppet:///site/profile/stunnel/stunnel@.service',
   }
   ~> exec { 'reload systemd for stunnel':
     refreshonly => true,
