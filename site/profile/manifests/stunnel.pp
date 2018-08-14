@@ -1,7 +1,7 @@
 class profile::stunnel (
 ) {
 
-  package { 'stunnel':
+  package { 'stunnel4':
     ensure => installed,
   }
 
