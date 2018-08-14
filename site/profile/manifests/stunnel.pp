@@ -1,6 +1,11 @@
 class profile::stunnel (
 ) {
 
+  $stunnel_package = $::osfamily ? {
+    'Debian' => 'stunnel4',
+    'RedHat' => 'stunnel',
+  }
+
   package { 'stunnel4':
     ensure => installed,
   }
