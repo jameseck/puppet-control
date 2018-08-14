@@ -201,8 +201,9 @@ je_firewall::rules:
     dport: 8443
     source: 192.168.1.11
 postfix::inet_interfaces: all
-postfix::relayhost: "[127.0.0.1]:10465"
 postfix_config:
+  'relayhost':
+    value: "[127.0.0.1]:10465"
   'smtp_use_tls':
     value: 'no'
   'smtp_sasl_auth_enable':
